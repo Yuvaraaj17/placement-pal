@@ -1,0 +1,11 @@
+# Build
+.nuxt
+dist
+coverage
+
+# Node
+node_modules
+
+# Env
+.env
+.env.*
