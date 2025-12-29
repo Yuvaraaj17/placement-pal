@@ -19,13 +19,8 @@ const items = [
     icon: House,
   },
   {
-    title: 'Dashboard',
-    url: '/dashboard',
-    icon: LayoutDashboard,
-  },
-  {
-    title: 'Test',
-    url: '/test',
+    title: 'Lab',
+    url: '/lab',
     icon: FlaskConical,
   },
   {
@@ -48,10 +43,10 @@ const items = [
             <SidebarMenu>
               <SidebarMenuItem v-for="item in items" :key="item.title">
                 <SidebarMenuButton as-child>
-                  <a :href="item.url">
+                  <NuxtLink :to="item.url" class="flex items-center gap-2">
                     <component :is="item.icon" />
                     <span>{{ item.title }}</span>
-                  </a>
+                  </NuxtLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             </SidebarMenu>
