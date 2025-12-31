@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { navigateTo } from '#imports'
 
 // shadcn components
-import { Field, FieldLabel, FieldDescription } from '@/components/ui/field'
+import { Field, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
@@ -68,6 +68,14 @@ const checkOverflow = () => {
   isOverflowing.value = el.scrollHeight > el.clientHeight
 }
 
+const modelValue = ref({
+  1: {
+    'skill_name': 'Python'
+  }, 2: {
+    'skill_name': 'C++'
+  }
+})
+
 watch(form, checkOverflow, { deep: true })
 onMounted(checkOverflow)
 </script>
@@ -83,9 +91,23 @@ onMounted(checkOverflow)
           <Field>
             <FieldLabel>Name</FieldLabel><Input v-model="form.name" placeholder="Your Name" />
           </Field>
-          <Field>
-            <FieldLabel>Phone</FieldLabel><Input v-model="form.phone" placeholder="+91..." />
-          </Field>
+          <div class="flex flex-row items-end justify-center gap-2">
+            <Field class="w-fit">
+              <Select>
+                <SelectTrigger>
+                  <SelectValue>+91</SelectValue>
+                </SelectTrigger>
+                <!-- <SelectContent>
+                  <SelectItem value="12">
+                    +12
+                  </SelectItem>
+                </SelectContent> -->
+              </Select>
+            </Field>
+            <Field>
+              <FieldLabel>Phone</FieldLabel><Input v-model="form.phone" placeholder="12345 67890" />
+            </Field>
+          </div>
 
           <Field> <FieldLabel>Email</FieldLabel><Input type="email" v-model="form.email" /> </Field>
           <Field>
@@ -123,9 +145,20 @@ onMounted(checkOverflow)
           ><Input v-model="form.soft_skills" placeholder="Leadership, Problem Solving" />
         </Field>
         <Field>
-          <FieldLabel>Tools / Tech</FieldLabel>
-          <Input v-model="form.tools_tech" placeholder="VS Code, Git, AWS..." />
-          <FieldDescription>Comma separated values are fine</FieldDescription>
+          <FieldLabel>Your skills</FieldLabel>
+          <FieldContent>
+            <Card class="flex min-h-36 overflow-y-scroll">
+              <CardContent class="flex -ml-2 -mt-2 gap-2">
+                <span v-for="skill in modelValue" :key="skill.id"
+                  class="text-xs text-muted-foreground bg-gray-200 w-fit px-2 py-1 rounded-full flex flex-row gap-1 items-end justify-center">
+                  <p>
+                    {{ skill.skill_name }}
+                  </p>
+                  <X size="12" />
+                </span>
+              </CardContent>
+            </Card>
+          </FieldContent>
         </Field>
       </section>
 
