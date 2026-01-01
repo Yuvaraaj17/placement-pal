@@ -1,21 +1,13 @@
-<script setup>
-import { ref } from 'vue'
-import { navigateTo } from '#imports'
-
-// shadcn components
-import { Field, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
+<script setup lang="ts">
+import { hardSkills, softSkills, type Skill } from '~/assets/data/consts'
+import { Check, PlusIcon,X } from 'lucide-vue-next'
 
 definePageMeta({
   layout: 'page',
 })
 
-import { onMounted, watch } from 'vue'
-
-const previewRef = ref(null)
-const isOverflowing = ref(false)
+const previewRef = ref<HTMLDivElement | null>(null)
+const isOverflowing = ref<boolean>(false)
 
 const form = ref({
   // Personal Info
@@ -62,22 +54,36 @@ const submitForm = () => {
   navigateTo('/lab/resume')
 }
 
-const checkOverflow = () => {
-  if (!previewRef.value) return
+interface SkillTrack {
+  [key: string] : string
+}
+
+const addedSkills = reactive<SkillTrack>({})
+
+const addedSkillsList = computed(() =>
+  Object.entries(addedSkills).map(([id, skill]) => ({ id, skill }))
+)
+
+const addSkill = (skillObj : Skill)=>{
+  console.log("selected")
+  addedSkills[skillObj.id] = skillObj.skill 
+}
+
+const removeSkill = (id : string)=>{
+  console.log("deleted")
+  delete addedSkills[id]
+}
+
+const checkOverflow = (): void => {
   const el = previewRef.value
+  if (!el) return
+
   isOverflowing.value = el.scrollHeight > el.clientHeight
 }
 
-const modelValue = ref({
-  1: {
-    'skill_name': 'Python'
-  }, 2: {
-    'skill_name': 'C++'
-  }
-})
-
 watch(form, checkOverflow, { deep: true })
 onMounted(checkOverflow)
+
 </script>
 
 <template>
@@ -136,25 +142,73 @@ onMounted(checkOverflow)
       <!-- ⭐ SKILLS -->
       <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Skills</h2>
-        <Field>
-          <FieldLabel>Hard Skills</FieldLabel
-          ><Input v-model="form.hard_skills" placeholder="JavaScript, SQL..." />
-        </Field>
-        <Field>
-          <FieldLabel>Soft Skills</FieldLabel
-          ><Input v-model="form.soft_skills" placeholder="Leadership, Problem Solving" />
-        </Field>
-        <Field>
+       <div class="flex flex-row gap-5">
+          <Field>
+            <FieldLabel>Hard Skills</FieldLabel>
+            <FieldContent>
+              <Popover>
+                <PopoverTrigger as-child>
+                  <Button variant="outline">
+                    <PlusIcon></PlusIcon><span>Add Skill</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent side="top" align="start">
+                  <Command>
+                    <CommandInput>Type Skill...</CommandInput>
+                    <CommandList class="max-h-50 overflow-y-auto">
+                      <CommandGroup>
+                        <CommandItem v-for="skill in hardSkills" @select="addSkill(skill)" :key="skill.id"
+                          :value="skill.skill" class="flex flex-row justify-between">
+                          <span>{{ skill.skill }}</span>
+                          <Check class="justify-self-end"
+                            v-if="addedSkillsList.find(item => item.id === skill.id)" />
+                        </CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </FieldContent>
+          </Field>
+          <Field>
+            <FieldLabel>Soft Skills</FieldLabel>
+            <FieldContent>
+              <Popover>
+                <PopoverTrigger as-child>
+                  <Button variant="outline">
+                    <PlusIcon></PlusIcon><span>Add Skill</span>
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent side="top" align="start">
+                  <Command>
+                    <CommandInput>Type Skill...</CommandInput>
+                    <CommandList class="max-h-50 overflow-y-auto">
+                      <CommandGroup>
+                        <CommandItem v-for="skill in softSkills" @select="addSkill(skill)" :key="skill.id"
+                          :value="skill.skill" class="flex flex-row justify-between">
+                          <span>{{ skill.skill }}</span>
+                          <Check class="justify-self-end"
+                            v-if="addedSkillsList.find(item => item.id === skill.id)" />
+                        </CommandItem>
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </FieldContent>
+          </Field>
+        </div>
+        <Field>    
           <FieldLabel>Your skills</FieldLabel>
           <FieldContent>
             <Card class="flex min-h-36 overflow-y-scroll">
               <CardContent class="flex -ml-2 -mt-2 gap-2">
-                <span v-for="skill in modelValue" :key="skill.id"
+                <span v-for="(skill, id) in addedSkillsList" :key="id"
                   class="text-xs text-muted-foreground bg-gray-200 w-fit px-2 py-1 rounded-full flex flex-row gap-1 items-end justify-center">
                   <p>
-                    {{ skill.skill_name }}
+                    {{ skill.skill }}
                   </p>
-                  <X size="12" />
+                  <X :size="12" @click="removeSkill(skill.id)"/>
                 </span>
               </CardContent>
             </Card>
