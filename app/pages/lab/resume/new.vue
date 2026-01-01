@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { hardSkills, softSkills, type Skill } from '~/assets/data/consts'
 import { Check, PlusIcon,X } from 'lucide-vue-next'
+import Calendar from '~/components/ui/calendar/Calendar.vue'
+import Checkbox from '~/components/ui/checkbox/Checkbox.vue'
 
 definePageMeta({
   layout: 'page',
@@ -31,6 +33,10 @@ const form = ref({
   exp_location: '',
   exp_responsibilities: '',
   exp_achievements: '',
+  exp_from_month: '',
+  exp_from_year: '',
+  exp_to_month: '',
+  exp_to_year: '',
   // Education
   edu_degree: '',
   edu_institute: '',
@@ -83,6 +89,21 @@ const checkOverflow = (): void => {
 
 watch(form, checkOverflow, { deep: true })
 onMounted(checkOverflow)
+
+const months = [
+  { label: "January", value: "Jan" }, { label: "February", value: "Feb" },
+  { label: "March", value: "Mar" },   { label: "April", value: "Apr" },
+  { label: "May", value: "May" },     { label: "June", value: "Jun" },
+  { label: "July", value: "Jul" },    { label: "August", value: "Aug" },
+  { label: "September", value: "Sep"},{ label: "October", value: "Oct" },
+  { label: "November", value: "Nov" },{ label: "December", value: "Dec" }
+]
+
+// YEARS (generate from 1980 → current year)
+const currentYear = new Date().getFullYear()
+const years = Array.from({ length: 50 }, (_, i) => currentYear - i)
+
+const isCurrent = ref(false)
 
 </script>
 
@@ -223,13 +244,74 @@ onMounted(checkOverflow)
         <Field> <FieldLabel>Job Title</FieldLabel><Input v-model="form.exp_job_title" /> </Field>
         <Field> <FieldLabel>Company</FieldLabel><Input v-model="form.exp_company" /> </Field>
 
-        <div class="grid grid-cols-2 gap-4">
-          <Field>
-            <FieldLabel>Dates</FieldLabel><Input v-model="form.exp_dates" placeholder="2022-2024" />
-          </Field>
+        <div class="grid grid-cols-3 gap-24">
+
+            <!-- FROM DATE -->
+            <Field>
+              <FieldLabel>From</FieldLabel>
+              <div class="flex gap-2">
+                <Select v-model="form.exp_from_month">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem v-for="m in months" :key="m.value" :value="m.value">
+                      {{ m.label }}
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select v-model="form.exp_from_year">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem v-for="y in years" :key="y" :value="y">{{ y }}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </Field>
+
+            <!-- TO DATE -->
+            <Field>
+            <div class="flex flex-row justify-between items-center">
+             <FieldLabel>To</FieldLabel>
+              <div class="flex flex-row gap-4 items-end justify-end px-1">
+                <Label for="current">Current</Label>
+                <Checkbox id="current" v-model="isCurrent" />
+              </div>
+            </div>
+              <div class="flex gap-2">
+                <Select v-model="form.exp_to_month" :disabled="isCurrent">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Month" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem v-for="m in months" :key="m.value" :value="m.value">
+                      {{ m.label }}
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+
+                <Select v-model="form.exp_to_year" :disabled="isCurrent">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem v-for="y in years" :key="y" :value="y">{{ y }}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </Field>
+
+          <!-- <Field>
+            <FieldLabel>Dates</FieldLabel>
+            <Calendar />
+            <Input v-model="form.exp_dates" placeholder="2022-2024" />
+          </Field> -->
           <Field>
             <FieldLabel>Location</FieldLabel
-            ><Input v-model="form.exp_location" placeholder="Remote / On-site" />
+            ><Input v-model="form.exp_location" placeholder="Chennai" />
           </Field>
         </div>
 
@@ -237,17 +319,8 @@ onMounted(checkOverflow)
           <FieldLabel>Responsibilities</FieldLabel>
           <Textarea
             v-model="form.exp_responsibilities"
-            rows="3"
-            placeholder="• Built UI components...\n• Improved load time by 30%"
-          />
-        </Field>
-
-        <Field>
-          <FieldLabel>Achievements</FieldLabel>
-          <Textarea
-            v-model="form.exp_achievements"
-            rows="3"
-            placeholder="• Reduced API latency by 25%..."
+            class="h-44 resize-none"
+            placeholder="• Built UI components..."
           />
         </Field>
       </section>
