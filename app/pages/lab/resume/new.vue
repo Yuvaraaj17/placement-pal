@@ -135,12 +135,58 @@ const addExperience = ()=>{
 }
 
 const removeExperience = (index : number)=>{
-  experienceList.splice(1, 1);
+  experienceList.splice(index, 1);
 }
 
 const resetExperience = ()=>{
   experienceList.length = 0;
   experienceList.push(emptyExperience)
+}
+
+const emptyEducation: Education = {
+  degree: '',
+  institution_name: '',
+  year: 0
+}
+
+const educationList: Education[] = reactive([
+  {
+    degree: '',
+    institution_name: '',
+    year: 0
+  }
+])
+
+const addEducation = ()=>{
+  educationList.push(emptyEducation);
+}
+
+const removeEducation = (index: number)=>{
+  educationList.splice(index,1);
+}
+
+const emptyProject : Project = {
+  project_title : '',
+  project_description : '',
+  tech_stack : '',
+  link : ''
+}
+
+const projectsList: Project[] = reactive([
+  {
+    project_title: '',
+    project_description: '',
+    tech_stack: '',
+    link: ''
+  }
+])
+
+const addProjects = ()=>{
+  projectsList.push(emptyProject)
+}
+
+const removeProject = (index : number)=>{
+  projectsList.splice(index, 1);
 }
 
 </script>
@@ -295,12 +341,16 @@ const resetExperience = ()=>{
           <Field>
             <div class="flex flex-row justify-between items-center pr-3">
               <FieldLabel>Job Title</FieldLabel>
-              <Trash2 :size="16" @click="removeExperience(ind)"/>
+              <div :class="{'cursor-not-allowed' : experienceList.length == 1}">
+                <Trash2 :size="16" :class="{
+                'pointer-events-none': experienceList.length == 1
+              }" @click="removeExperience(ind)"/>
+              </div>
             </div>
-            <Input v-model="item.job_title" />
+            <Input :v-model="item.job_title" />
           </Field>
           <Field>
-            <FieldLabel>Company</FieldLabel><Input v-model="item.company" />
+            <FieldLabel>Company</FieldLabel><Input :v-model="item.company" />
           </Field>
 
           <div class="grid grid-cols-3 gap-24">
@@ -309,7 +359,7 @@ const resetExperience = ()=>{
             <Field>
               <FieldLabel>From</FieldLabel>
               <div class="flex gap-2">
-                <Select v-model="item.from_month">
+                <Select :v-model="item.from_month">
                   <SelectTrigger>
                     <SelectValue placeholder="Month" />
                   </SelectTrigger>
@@ -320,7 +370,7 @@ const resetExperience = ()=>{
                   </SelectContent>
                 </Select>
 
-                <Select v-model="item.from_year">
+                <Select :v-model="item.from_year">
                   <SelectTrigger>
                     <SelectValue placeholder="Year" />
                   </SelectTrigger>
@@ -337,11 +387,11 @@ const resetExperience = ()=>{
                 <FieldLabel>To</FieldLabel>
                 <div class="flex flex-row gap-4 items-end justify-end px-1" v-if="ind == 0">
                   <Label for="current">Current</Label>
-                  <Checkbox id="current" v-model="isCurrent" />
+                  <Checkbox id="current" :v-model="isCurrent" />
                 </div>
               </div>
               <div class="flex gap-2">
-                <Select v-model="item.to_month" :disabled="isCurrent">
+                <Select :v-model="item.to_month" :disabled="isCurrent">
                   <SelectTrigger>
                     <SelectValue placeholder="Month" />
                   </SelectTrigger>
@@ -352,7 +402,7 @@ const resetExperience = ()=>{
                   </SelectContent>
                 </Select>
 
-                <Select v-model="item.to_year" :disabled="isCurrent">
+                <Select :v-model="item.to_year" :disabled="isCurrent">
                   <SelectTrigger>
                     <SelectValue placeholder="Year" />
                   </SelectTrigger>
@@ -364,70 +414,85 @@ const resetExperience = ()=>{
             </Field>
             <!-- LOCATION -->
             <Field>
-              <FieldLabel>Location</FieldLabel><Input v-model="item.job_location" placeholder="Chennai" />
+              <FieldLabel>Location</FieldLabel><Input :v-model="item.job_location" placeholder="Chennai" />
             </Field>
           </div>
 
           <!-- RESPONSIBILITIES -->
           <Field>
             <FieldLabel>Responsibilities</FieldLabel>
-            <Textarea v-model="item.responsibilities" class="h-44 resize-none"
+            <Textarea :v-model="item.responsibilities" class="h-44 resize-none"
               placeholder="• Built UI components..." />
           </Field>
           
           <!-- ADD EXPERIENCE -->
-          <Field>
-            <Button @click="addExperience">Add Another Experience</Button>
-          </Field>
         </section>
+       <Field>
+          <Button @click="addExperience">Add Another Experience</Button>
+        </Field>
 
       </section>
 
       <!-- ⭐ EDUCATION -->
       <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Education</h2>
-        <Field>
-          <FieldLabel>Degree</FieldLabel><Input v-model="form.edu_degree" />
-        </Field>
-        <Field>
-          <FieldLabel>Institute</FieldLabel><Input v-model="form.edu_institute" />
-        </Field>
-        <Field>
-          <FieldLabel>Graduation Year</FieldLabel><Input v-model="form.edu_year" placeholder="2024" />
-        </Field>
+      <section class="space-y-6" v-for="(item,ind) in educationList">
+         <Field>
+            <div class="flex flex-row justify-between items-center pr-3">
+              <FieldLabel>Degree</FieldLabel>
+              <div :class="{'cursor-not-allowed' : educationList.length == 1}">
+                <Trash2 :size="16" :class="{
+                'pointer-events-none': educationList.length == 1
+              }" @click="removeEducation(ind)"/>
+              </div>
+            </div>
+            <Input :v-model="item.degree" />
+          </Field>
+        <div class="flex flex-row gap-4">
+          <Field>
+            <FieldLabel>Institute</FieldLabel><Input :v-model="item.institution_name" />
+          </Field>
+          <Field class="w-fit">
+            <FieldLabel>Graduation Year</FieldLabel><Input :v-model="item.year" placeholder="2024"/>
+          </Field>
+        </div>
       </section>
+      <Field>
+            <Button @click="addEducation">Add Another Education</Button>
+          </Field>
+          </section>
 
       <!-- ⭐ PROJECTS -->
-      <section class="space-y-6">
+     <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Projects</h2>
+        <section class="space-y-6" v-for="(item, ind) in projectsList">
+          <Field>
+            <div class="flex flex-row justify-between items-center pr-3">
+              <FieldLabel>Title</FieldLabel>
+              <div :class="{ 'cursor-not-allowed': projectsList.length == 1 }">
+                <Trash2 :size="16" :class="{
+                  'pointer-events-none': projectsList.length == 1
+                }" @click="removeProject(ind)" />
+              </div>
+            </div>
+            <Input :v-model="item.project_title" />
+          </Field>
+          <Field>
+            <FieldLabel>Tech Used</FieldLabel><Input :v-model="item.tech_stack" />
+          </Field>
+          <Field>
+            <FieldLabel>Description</FieldLabel><Textarea :v-model="item.project_description"
+              class="h-44 resize-none" />
+          </Field>
+          <Field>
+            <FieldLabel>Link</FieldLabel><Input :v-model="item.link" placeholder="https://..." />
+          </Field>
+        </section>
         <Field>
-          <FieldLabel>Title</FieldLabel><Input v-model="form.proj_title" />
-        </Field>
-        <Field>
-          <FieldLabel>Tech Used</FieldLabel><Input v-model="form.proj_tech" />
-        </Field>
-        <Field>
-          <FieldLabel>Description</FieldLabel><Textarea v-model="form.proj_description" rows="3" />
-        </Field>
-        <Field>
-          <FieldLabel>Link</FieldLabel><Input v-model="form.proj_link" placeholder="https://..." />
+          <Button @click="addProjects">Add Another Project</Button>
         </Field>
       </section>
-
-      <!-- ⭐ CERTIFICATIONS -->
-      <section class="space-y-6">
-        <h2 class="border-b pb-2 text-xl font-semibold">Certifications</h2>
-        <Field>
-          <FieldLabel>Title</FieldLabel><Input v-model="form.cert_title" />
-        </Field>
-        <Field>
-          <FieldLabel>Organization</FieldLabel><Input v-model="form.cert_org" />
-        </Field>
-        <Field>
-          <FieldLabel>Date</FieldLabel><Input type="date" v-model="form.cert_date" />
-        </Field>
-      </section>
-
+      
       <!-- SUBMIT -->
       <Button class="mt-4 w-full py-6 text-lg" @click="submitForm"> Save Resume </Button>
     </div>
