@@ -18,18 +18,6 @@ definePageMeta({
   layout: 'auth',
 })
 
-const user = useSupabaseUser() // Get the current user
-
-if (user.value) {
-  // If user is already logged in, redirect to home
-  navigateTo({
-    path: '/redirect',
-    query: {
-      redirect: '/home',
-    },
-  })
-}
-
 const form = reactive({
   email: '',
   password: '',
@@ -43,7 +31,6 @@ const errors = reactive({
 }) // Error Data
 
 const isLoading = ref(false) // Loading state for spinner
-const supabase = useSupabaseClient()
 
 const isValidEmail = (email: string) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -65,14 +52,17 @@ const handleLogin = async () => {
 
   isLoading.value = true // Start loading
 
-  const response = await supabase.auth.signUp(signupData)
+  const response = await $fetch('/api/auth/signup', {
+    method: 'post',
+    body: signupData
+  })
 
   setTimeout(() => {
     isLoading.value = false // Stop loading after delay
-    if (response.error) {
-      toast.error('Error signing up: ' + response.error.message)
+    if (response.statusCode !== 200) {
+      toast.error('Error signing up: ' + response.message)
     } else {
-      toast.success('Signup successful! Please check your email to confirm your account.')
+      toast.success('Signup successful! Continuing to Login')
       setTimeout(() => {
         navigateTo({
           path: '/redirect',

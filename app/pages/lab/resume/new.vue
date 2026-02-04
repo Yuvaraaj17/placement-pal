@@ -11,6 +11,21 @@ definePageMeta({
 const previewRef = ref<HTMLDivElement | null>(null)
 const isOverflowing = ref<boolean>(false)
 
+const personalInfo = reactive({
+  name: '',
+  phone_code: '',
+  phone_number: '',
+  email: '',
+  location: '',
+  linkedin : '',
+  github: ''
+})
+
+const summary = reactive({
+  pref_role: '',
+  summary: '',
+})
+
 const form = ref({
   // Personal Info
   name: '',
@@ -117,7 +132,7 @@ const emptyExperience : Experience = {
   responsibilities: ''
 }
 
-const experienceList : Experience[] = reactive([
+const experienceList = reactive<Experience[]>([
   {
   job_title: '',
   company: '',
@@ -131,7 +146,16 @@ const experienceList : Experience[] = reactive([
 ])
 
 const addExperience = ()=>{
-  experienceList.push(emptyExperience)
+  experienceList.push({
+  job_title: '',
+  company: '',
+  from_month: '',
+  from_year: '',
+  to_month: '',
+  to_year: '',
+  job_location: '',
+  responsibilities: ''
+})
 }
 
 const removeExperience = (index : number)=>{
@@ -149,7 +173,7 @@ const emptyEducation: Education = {
   year: 0
 }
 
-const educationList: Education[] = reactive([
+const educationList = reactive<Education[]>([
   {
     degree: '',
     institution_name: '',
@@ -172,7 +196,7 @@ const emptyProject : Project = {
   link : ''
 }
 
-const projectsList: Project[] = reactive([
+const projectsList = reactive<Project[]>([
   {
     project_title: '',
     project_description: '',
@@ -200,7 +224,7 @@ const removeProject = (index : number)=>{
         <h2 class="border-b pb-2 text-xl font-semibold">Personal Information</h2>
         <div class="grid grid-cols-2 gap-4">
           <Field>
-            <FieldLabel>Name</FieldLabel><Input v-model="form.name" placeholder="Your Name" />
+            <FieldLabel>Name</FieldLabel><Input v-model="personalInfo.name" placeholder="Your Name" />
           </Field>
           <div class="flex flex-row items-end justify-center gap-2">
             <Field class="w-fit">
@@ -216,22 +240,22 @@ const removeProject = (index : number)=>{
               </Select>
             </Field>
             <Field>
-              <FieldLabel>Phone</FieldLabel><Input v-model="form.phone" placeholder="12345 67890" />
+              <FieldLabel>Phone</FieldLabel><Input v-model="personalInfo.phone_number" placeholder="12345 67890" />
             </Field>
           </div>
 
           <Field>
-            <FieldLabel>Email</FieldLabel><Input type="email" v-model="form.email" />
+            <FieldLabel>Email</FieldLabel><Input type="email" v-model="personalInfo.email" />
           </Field>
           <Field>
-            <FieldLabel>Location</FieldLabel><Input v-model="form.location" placeholder="City, State" />
+            <FieldLabel>Location</FieldLabel><Input v-model="personalInfo.location" placeholder="City, State" />
           </Field>
 
           <Field>
-            <FieldLabel>LinkedIn</FieldLabel><Input v-model="form.linkedin" />
+            <FieldLabel>LinkedIn</FieldLabel><Input v-model="personalInfo.linkedin" />
           </Field>
           <Field>
-            <FieldLabel>GitHub</FieldLabel><Input v-model="form.github" />
+            <FieldLabel>GitHub</FieldLabel><Input v-model="personalInfo.github" />
           </Field>
         </div>
       </section>
@@ -240,11 +264,11 @@ const removeProject = (index : number)=>{
       <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Summary / Objective</h2>
         <Field>
-          <FieldLabel>Preferred Role</FieldLabel><Input v-model="form.preferred_role"
+          <FieldLabel>Preferred Role</FieldLabel><Input v-model="summary.pref_role"
             placeholder="Frontend Developer" />
         </Field>
         <Field>
-          <FieldLabel>Short Summary</FieldLabel><Textarea v-model="form.summary" rows="3"
+          <FieldLabel>Short Summary</FieldLabel><Textarea v-model="summary.summary" class="h-34 resize-none"
             placeholder="2–3 line pitch..." />
         </Field>
       </section>
@@ -310,10 +334,10 @@ const removeProject = (index : number)=>{
           <FieldLabel>Your skills</FieldLabel>
           <FieldContent>
             <Card class="flex min-h-36 overflow-y-scroll">
-              <CardContent class="flex -ml-2 -mt-2 gap-2">
+              <CardContent class="flex -ml-2 -mt-2 gap-2 flex-wrap">
                 <span v-for="(skill, id) in addedSkillsList" :key="id"
                   class="text-xs text-muted-foreground bg-gray-200 w-fit px-2 py-1 rounded-full flex flex-row gap-1 items-end justify-center">
-                  <p>
+                  <p class="whitespace-nowrap">
                     {{ skill.skill }}
                   </p>
                   <X :size="12" @click="removeSkill(skill.id)" />
@@ -502,35 +526,40 @@ const removeProject = (index : number)=>{
       <!-- A4 SHEET (NO SCROLL) -->
       <div ref="previewRef" class="sticky top-4 h-[297mm] w-[210mm] overflow-hidden bg-white p-10 shadow-lg"
         :class="{ 'overflow-warning': isOverflowing }">
-        <h1 class="text-3xl font-bold">{{ form.name }}</h1>
+        <h1 class="text-3xl font-bold">{{ personalInfo.name }}</h1>
         <p class="mb-1 text-sm text-gray-600">
-          {{ form.location }} • {{ form.email }} • {{ form.phone }}
+          {{ personalInfo.location }} | {{ personalInfo.email }} | {{ personalInfo.phone_number }}
+        </p>
+        <p class="mb-1 text-sm text-gray-600">
+          {{ personalInfo.linkedin }} | {{ personalInfo.github }}
         </p>
         <hr class="my-4" />
 
         <h2 class="text-lg font-semibold">Summary</h2>
-        <p class="text-sm">{{ form.summary }}</p>
+        <p class="text-sm">{{ summary.summary }}</p>
 
         <h2 class="mt-4 text-lg font-semibold">Skills</h2>
-        <p class="text-sm">{{ form.hard_skills }} • {{ form.tools_tech }}</p>
+        <div class="flex flex-wrap"><p class="text-sm whitespace-nowrap" v-for="skill in addedSkillsList">{{ skill.skill }} , </p></div>
 
         <h2 class="mt-4 text-lg font-semibold">Experience</h2>
-        <p class="text-sm font-medium">{{ form.exp_job_title }} — {{ form.exp_company }}</p>
-        <p class="text-xs">{{ form.exp_dates }} • {{ form.exp_location }}</p>
-        <pre class="mt-2 text-xs whitespace-pre-line">{{ form.exp_responsibilities }}</pre>
+        <div v-for="exp in experienceList">
+          <p class="text-sm font-medium">{{ exp.job_title }} — {{ exp.company }}</p>
+          <p class="text-xs">{{ exp.from_year }} - {{ exp.to_year }} • {{ exp.job_location }}</p>
+          <pre class="mt-2 text-xs whitespace-pre-line">{{ exp.responsibilities }}</pre>
+        </div>
+        
 
         <h2 class="mt-4 text-lg font-semibold">Education</h2>
-        <p class="text-sm">
-          {{ form.edu_degree }} - {{ form.edu_institute }} ({{ form.edu_year }})
+        <p class="text-sm" v-for="(edu,ind) in educationList" :key="ind">
+          {{ edu.degree }} - {{ edu.institution_name }} ({{ edu.year }})
         </p>
 
         <h2 class="mt-4 text-lg font-semibold">Projects</h2>
-        <p class="text-sm font-medium">{{ form.proj_title }}</p>
-        <p class="text-xs">{{ form.proj_tech }}</p>
-        <pre class="text-xs">{{ form.proj_description }}</pre>
-
-        <h2 class="mt-4 text-lg font-semibold">Certifications</h2>
-        <p class="text-sm">{{ form.cert_title }} — {{ form.cert_org }} ({{ form.cert_date }})</p>
+        <div v-for="proj in projectsList">
+          <p class="text-sm font-medium">{{ proj.project_title }}</p>
+        <p class="text-xs">{{ proj.tech_stack }}</p>
+        <pre class="text-xs">{{ proj.project_description }}</pre>
+        </div>
       </div>
     </div>
   </div>

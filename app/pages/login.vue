@@ -18,21 +18,21 @@ definePageMeta({
   layout: 'auth',
 })
 
-const user = useSupabaseUser() // Get the current user
+// const user = useSupabaseUser() // Get the current user
 
-if (user.value) {
-  // If user is already logged in, redirect to home
-  navigateTo({
-    path: '/redirect',
-    query: {
-      redirect: '/home',
-    },
-  })
-}
+// if (user.value) {
+//   // If user is already logged in, redirect to home
+//   navigateTo({
+//     path: '/redirect',
+//     query: {
+//       redirect: '/home',
+//     },
+//   })
+// }
 
 // Otherwise stay on the login page, these code will run when the component is mounted
 
-const supabase = useSupabaseClient() // Supabase client instance for authentication
+// const supabase = useSupabaseClient() // Supabase client instance for authentication
 
 const form = reactive({
   email: '',
@@ -65,7 +65,10 @@ const handleLogin = async () => {
 
   isLoading.value = true // Start loading
 
-  const response = await supabase.auth.signInWithPassword(loginData) // Attempt login
+  const response = await $fetch('/api/auth/login', {
+    method: 'post',
+    body: loginData
+  }) // Attempt login
 
   setTimeout(() => {
     isLoading.value = false // Stop loading after delay
@@ -75,8 +78,8 @@ const handleLogin = async () => {
     form.email = ''
     errors.email = ''
     errors.password = ''
-    if (response.error) {
-      toast.error('Error logging in: ' + response.error.message) // Show error toast
+    if (response.statusCode !== 200) {
+      toast.error('Error logging in: ' + response.message) // Show error toast
     } else {
       toast.success('Login successful!') // Show success toast
       setTimeout(() => {

@@ -11,6 +11,7 @@ import {
   SidebarProvider,
 } from '@/components/ui/sidebar'
 import { Calendar, FlaskConical, House, LayoutDashboard } from 'lucide-vue-next'
+import { toast } from 'vue-sonner'
 
 const items = [
   {
@@ -29,6 +30,29 @@ const items = [
     icon: Calendar,
   },
 ]
+
+const logout = async ()=>{
+  const response = await $fetch('/api/auth/logout', {
+    method: 'post',
+    body: {}
+  })
+
+  setTimeout(() => {
+    if (response.statusCode !== 200) {
+      toast.error('Error logging in: ' + response.message) // Show error toast
+    } else {
+      toast.success('Logged out!') // Show success toast
+      setTimeout(() => {
+        navigateTo({
+          path: '/redirect',
+          query: {
+            redirect: '/login',
+          },
+        })
+      }, 1000) // Redirect after a short delay, so user can see the success toast
+    }
+  }, 1000)
+}
 </script>
 
 <template>
@@ -53,6 +77,7 @@ const items = [
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter><span class="rounded-md bg-slate-50 p-3 shadow" @click="logout">Logout</span></SidebarFooter>
     </Sidebar>
     <slot />
   </SidebarProvider>

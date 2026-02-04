@@ -2,20 +2,27 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: ['shadcn-nuxt', '@nuxtjs/supabase', '@nuxt/eslint'],
+  modules: [
+    'shadcn-nuxt',
+    '@nuxt/eslint',
+    'nuxt-mongoose',
+  ],
   shadcn: {
     prefix: '',
     componentDir: '@/components/ui',
   },
+  mongoose: {
+    uri: process.env.NUXT_MONGODB_CONNECTION,
+    options: {
+      family: 4
+    },
+    modelsDir: 'models',
+    devtools: true,
+  },
   runtimeConfig: {
     public: {
-      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL,
-      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY,
+      mongoUri: process.env.NUXT_MONGODB_CONNECTION
     },
-  },
-  supabase: {
-    url: process.env.NUXT_PUBLIC_SUPABASE_URL,
-    key: process.env.NUXT_PUBLIC_SUPABASE_KEY,
   },
 
   css: ['~/assets/css/tailwind.css'],
