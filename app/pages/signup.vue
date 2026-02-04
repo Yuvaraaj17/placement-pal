@@ -54,7 +54,7 @@ const handleLogin = async () => {
 
   const response = await $fetch('/api/auth/signup', {
     method: 'post',
-    body: signupData
+    body: signupData,
   })
 
   setTimeout(() => {

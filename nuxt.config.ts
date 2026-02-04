@@ -2,11 +2,7 @@
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: [
-    'shadcn-nuxt',
-    '@nuxt/eslint',
-    'nuxt-mongoose',
-  ],
+  modules: ['shadcn-nuxt', '@nuxt/eslint', 'nuxt-mongoose'],
   shadcn: {
     prefix: '',
     componentDir: '@/components/ui',
@@ -14,14 +10,14 @@ export default defineNuxtConfig({
   mongoose: {
     uri: process.env.NUXT_MONGODB_CONNECTION,
     options: {
-      family: 4
+      family: 4,
     },
     modelsDir: 'models',
     devtools: true,
   },
   runtimeConfig: {
     public: {
-      mongoUri: process.env.NUXT_MONGODB_CONNECTION
+      mongoUri: process.env.NUXT_MONGODB_CONNECTION,
     },
   },
 

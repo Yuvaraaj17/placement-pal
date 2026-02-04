@@ -10,14 +10,14 @@ export interface Experience {
 }
 
 export interface Education {
-  degree : string,
-  institution_name : string,
+  degree: string
+  institution_name: string
   year: number
 }
 
 export interface Project {
-  project_title: string,
-  project_description: string,
-  tech_stack: string,
-  link: string,
+  project_title: string
+  project_description: string
+  tech_stack: string
+  link: string
 }

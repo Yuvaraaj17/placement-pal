@@ -67,7 +67,7 @@ const handleLogin = async () => {
 
   const response = await $fetch('/api/auth/login', {
     method: 'post',
-    body: loginData
+    body: loginData,
   }) // Attempt login
 
   setTimeout(() => {

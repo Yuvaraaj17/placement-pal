@@ -1,1 +1,1 @@
-<template>Drive page</template>
+<template><span>Drive page</span></template>

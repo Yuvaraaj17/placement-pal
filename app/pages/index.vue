@@ -1,10 +1,7 @@
 <script setup>
-
-const userInfo = useCookie('userInfo',
-  {
-    default: () => (null)
-  }
-)
+const userInfo = useCookie('userInfo', {
+  default: () => null,
+})
 
 if (userInfo && userInfo.user) {
   setTimeout(() => {
@@ -35,7 +32,7 @@ if (userInfo && userInfo.user) {
 //   })
 // }
 
-const goToLogin = ()=>{
+const goToLogin = () => {
   navigateTo({
     path: '/redirect',
     query: {
@@ -46,6 +43,11 @@ const goToLogin = ()=>{
 </script>
 
 <template>
-  <div>Welcome to AURCC</div>
-  <div>Proceed to <button class="border px-2 border-black rounded-xs" @click="goToLogin">Login</button></div>
+  <div>
+    Welcome to AURCC
+    <div>
+      Proceed to
+      <button class="rounded-xs border border-black px-2" @click="goToLogin">Login</button>
+    </div>
+  </div>
 </template>

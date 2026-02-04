@@ -17,11 +17,11 @@ export default defineEventHandler((event) => {
       // 2. Verify the JWT
       const config = useRuntimeConfig()
       const decoded = jwt.verify(token, config.jwtAccessSecret)
-      
+
       // 3. Attach user data to the 'event' so your API routes can use it
       event.context.user = decoded
     } catch (err) {
-      throw createError({ statusCode: 401, statusMessage: 'Token Expired' })
+      if (err instanceof Error) throw createError({ statusCode: 401, statusMessage: err.message })
     }
   }
 })

@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from '@/components/ui/sidebar'
-import { Calendar, FlaskConical, House, LayoutDashboard } from 'lucide-vue-next'
+import { Calendar, FlaskConical, House } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
 const items = [
@@ -31,10 +31,10 @@ const items = [
   },
 ]
 
-const logout = async ()=>{
+const logout = async () => {
   const response = await $fetch('/api/auth/logout', {
     method: 'post',
-    body: {}
+    body: {},
   })
 
   setTimeout(() => {
@@ -77,7 +77,11 @@ const logout = async ()=>{
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter><span class="rounded-md bg-slate-50 p-3 shadow" @click="logout">Logout</span></SidebarFooter>
+      <SidebarFooter
+        ><span class="rounded-md bg-slate-50 p-3 shadow" @click="logout"
+          >Logout</span
+        ></SidebarFooter
+      >
     </Sidebar>
     <slot />
   </SidebarProvider>
