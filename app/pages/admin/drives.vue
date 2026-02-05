@@ -11,7 +11,6 @@ import { toast } from 'vue-sonner'
 const defaultPlaceholder = today(getLocalTimeZone())
 
 // just a ref, no types
-const date = ref(null)
 const isDialogOpen = ref(false)
 
 const isSubmitting = ref(false)
@@ -48,7 +47,7 @@ const driveForm = ref({
   },
   required_cgpa: 7.5,
   venue: '',
-  date_of_drive: null,
+  date_of_drive: today(getLocalTimeZone()),
 })
 
 const resetDriveForm = () => {
@@ -66,18 +65,25 @@ const resetDriveForm = () => {
     },
     required_cgpa: 7.5,
     venue: '',
-    date_of_drive: null,
+    date_of_drive: today(getLocalTimeZone()),
   }
   isSubmitting.value = false
   isRegistered.value = false
 }
 
 const registerDriveForm = async () => {
-  console.log(driveForm.value)
+  const payload = {
+    ...driveForm.value,
+    // If date_of_drive exists, convert it. 
+    // If it's missing (null/undefined), generate "today" on the fly.
+    date_of_drive: driveForm.value.date_of_drive 
+      ? driveForm.value.date_of_drive.toDate(getLocalTimeZone()) 
+      : today(getLocalTimeZone()).toDate(getLocalTimeZone())
+  }
 
   const response = await $fetch('/api/admin/drive/register', {
     method: 'post',
-    body: driveForm,
+    body: payload,
   })
 
   setTimeout(() => {
@@ -193,7 +199,7 @@ definePageMeta({
                     <Button
                       variant="outline"
                       :class="
-                        cn('justify-start text-left font-normal', !date && 'text-muted-foreground')
+                        cn('justify-start text-left font-normal', !driveForm.date_of_drive && 'text-muted-foreground')
                       "
                     >
                       <CalendarIcon />

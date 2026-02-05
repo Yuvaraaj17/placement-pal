@@ -40,7 +40,7 @@ const DriveSchema = new Schema(
     },
     date_of_drive: {
       type: Date,
-      default: null,
+      default: Date.now,
     },
   },
   {
