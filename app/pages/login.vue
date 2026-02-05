@@ -78,17 +78,27 @@ const handleLogin = async () => {
     form.email = ''
     errors.email = ''
     errors.password = ''
+    console.log(response)
     if (response.statusCode !== 200) {
       toast.error('Error logging in: ' + response.message) // Show error toast
     } else {
       toast.success('Login successful!') // Show success toast
       setTimeout(() => {
-        navigateTo({
-          path: '/redirect',
-          query: {
-            redirect: '/home',
-          },
-        })
+        if (response.role == 'admin') {
+          navigateTo({
+            path: '/redirect',
+            query: {
+              redirect: '/admin/home',
+            },
+          })
+        } else {
+          navigateTo({
+            path: '/redirect',
+            query: {
+              redirect: '/home',
+            },
+          })
+        }
       }, 1000) // Redirect after a short delay, so user can see the success toast
     }
   }, 1000)

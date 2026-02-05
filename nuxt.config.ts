@@ -18,6 +18,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       mongoUri: process.env.NUXT_MONGODB_CONNECTION,
+      jwtAccessSecret: process.env.NUXT_JWT_REFRESH_SECRET,
     },
   },
 

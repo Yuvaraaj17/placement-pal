@@ -1,17 +1,13 @@
 <script setup>
-const userInfo = useCookie('userInfo', {
-  default: () => null,
-})
+const user = useCookie('access_token')
 
-if (userInfo && userInfo.user) {
-  setTimeout(() => {
-    navigateTo({
-      path: '/redirect',
-      query: {
-        redirect: '/home',
-      },
-    })
-  }, 5000)
+if (user) {
+  navigateTo({
+    path: '/redirect',
+    query: {
+      redirect: '/home',
+    },
+  })
 }
 // const user = useSupabaseUser() // Get the current user
 

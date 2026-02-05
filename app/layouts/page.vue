@@ -13,21 +13,36 @@ import {
 import { Calendar, FlaskConical, House } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
+const token = useCookie('access_token').value
+const user = decodeJWT(token)
+const userRole = user?.role || 'user'
+
 const items = [
   {
     title: 'Home',
-    url: '/home',
+    url: {
+      admin: '/admin/home',
+      user: '/home',
+    },
     icon: House,
   },
   {
     title: 'Lab',
-    url: '/lab',
+    url: {
+      admin: '/admin/lab',
+      user: '/lab',
+    },
     icon: FlaskConical,
+    role: ['admin', 'user'],
   },
   {
     title: 'Drives',
-    url: '/drive',
+    url: {
+      admin: '/admin/drives',
+      user: '/drives',
+    },
     icon: Calendar,
+    role: ['admin', 'user'],
   },
 ]
 
@@ -67,7 +82,10 @@ const logout = async () => {
             <SidebarMenu>
               <SidebarMenuItem v-for="item in items" :key="item.title">
                 <SidebarMenuButton as-child>
-                  <NuxtLink :to="item.url" class="flex items-center gap-2">
+                  <NuxtLink
+                    :to="userRole === 'admin' ? item.url.admin : item.url.user"
+                    class="flex items-center gap-2"
+                  >
                     <component :is="item.icon" />
                     <span>{{ item.title }}</span>
                   </NuxtLink>

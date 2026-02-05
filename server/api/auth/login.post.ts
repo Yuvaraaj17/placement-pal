@@ -8,13 +8,17 @@ export default defineEventHandler(async (event) => {
   const user = await User.findOne({ email }).select('+password')
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    throw createError({ statusCode: 401, message: 'Invalid credentials' })
+    return { statusCode: 401, message: 'Invalid credentials', role: 'user' }
   }
 
   // 1. Generate Tokens
-  const accessToken = jwt.sign({ id: user._id }, process.env.NUXT_JWT_ACCESS_SECRET as string, {
-    expiresIn: '15m',
-  })
+  const accessToken = jwt.sign(
+    { id: user._id, role: user.role },
+    process.env.NUXT_JWT_ACCESS_SECRET as string,
+    {
+      expiresIn: '1d',
+    },
+  )
   const refreshToken = jwt.sign({ id: user._id }, process.env.NUXT_JWT_REFRESH_SECRET as string, {
     expiresIn: '7d',
   })
@@ -29,7 +33,7 @@ export default defineEventHandler(async (event) => {
   setCookie(event, 'access_token', accessToken, {
     secure: true,
     sameSite: 'lax',
-    maxAge: 15 * 60, // 15 minutes
+    maxAge: 24 * 60 * 60, // 15 minutes
   })
 
   // 3. Set Refresh Cookie (Long lived)
@@ -41,5 +45,5 @@ export default defineEventHandler(async (event) => {
     maxAge: 7 * 24 * 60 * 60,
   })
 
-  return { statusCode: 200, message: 'Logged In !!!' }
+  return { statusCode: 200, message: 'Logged In !!!', role: user.role }
 })
