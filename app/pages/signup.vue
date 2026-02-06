@@ -19,35 +19,37 @@ definePageMeta({
 })
 
 const form = reactive({
-  email: '',
   password: '',
   confirmPassword: '',
+  user_id: '',
 }) // Form Data
 
 const errors = reactive({
-  email: '',
   password: '',
   confirmPassword: '',
+  user_id: '',
 }) // Error Data
 
 const isLoading = ref(false) // Loading state for spinner
 
-const isValidEmail = (email: string) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  console.log(re.test(email))
-  return re.test(email)
-} // Vallidates Email format
+const isValidId = (id: string) => {
+  if (id.length > 12 || id.length < 7) {
+    return false
+  }
+
+  return true
+}
 
 const handleLogin = async () => {
-  errors.email = isValidEmail(form.email) ? '' : 'Invalid email'
   errors.password = form.password.length < 6 ? 'Too short' : ''
   errors.confirmPassword = form.password !== form.confirmPassword ? 'Passwords do not match' : ''
+  errors.user_id = isValidId(form.user_id) ? '' : 'Invalid Reg No/Admin Id'
 
-  if (errors.email || errors.password || errors.confirmPassword) return
+  if (errors.password || errors.confirmPassword || errors.user_id) return
 
   const signupData = {
-    email: form.email,
     password: form.password,
+    user_id: form.user_id,
   } // Prepare Signup Data
 
   isLoading.value = true // Start loading
@@ -85,16 +87,16 @@ const handleLogin = async () => {
       <form>
         <div class="grid w-full items-center gap-4">
           <div class="flex flex-col space-y-1.5">
-            <Label for="email">Email</Label>
+            <Label for="user_id">Reg No / Admin Id :</Label>
             <Input
-              id="email"
-              v-model="form.email"
-              type="email"
-              placeholder="mail@example.com"
+              id="user_id"
+              v-model="form.user_id"
+              type="text"
+              placeholder="710020104037/EMP1000"
               :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
               :disabled="isLoading"
             />
-            <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.email }}</Muted>
+            <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.user_id }}</Muted>
           </div>
           <div class="flex flex-col space-y-1.5">
             <Label for="password">Password</Label>

@@ -70,7 +70,6 @@ const form = ref({
 })
 
 const submitForm = () => {
-  console.log('FORM SUBMITTED:', form.value)
   navigateTo('/lab/resume')
 }
 

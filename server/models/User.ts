@@ -2,11 +2,27 @@ import { Schema, model } from 'mongoose'
 
 const UserSchema = new Schema(
   {
-    email: { type: String, required: true, unique: true, lowercase: true },
-    password: { type: String, required: true, select: false }, // 'select: false' hides it from queries by default
-    role: { type: String, default: 'user' },
+    // Common Fields for everyone
+    user_id: { type: String, unique: true },
+    email: { type: String, sparse: true, unique: true, lowercase: true },
+    password: { type: String, required: true, select: false },
+    role: {
+      type: String,
+      required: true,
+      enum: ['admin', 'student'],
+      default: 'student',
+    },
+    name: { type: String, trim: true },
+
+    dept: {
+      type: String,
+      enum: ['CSE', 'ECE', 'EEE', 'MECH', null],
+      uppercase: true,
+    },
+    cgpa: { type: Number, min: 7.5, max: 9.5 },
+    current_offers: { type: Number, min: 0, max: 2 },
   },
   { timestamps: true, collection: 'users' },
 )
 
-export const User = model('User', UserSchema, 'users')
+export const User = model('User', UserSchema)

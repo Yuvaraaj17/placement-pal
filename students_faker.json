@@ -1,0 +1,2002 @@
+[
+  {
+    "reg_no": "226236713398",
+    "name": "Aditya Gole",
+    "dept": "EEE",
+    "cgpa": 8.54,
+    "current_offers": 1,
+    "role": "student",
+    "email": "jagrati60@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "116311799072",
+    "name": "Vansha Batta",
+    "dept": "EEE",
+    "cgpa": 8.98,
+    "current_offers": 1,
+    "role": "student",
+    "email": "jsachdev@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "279005802980",
+    "name": "Lajita Dara",
+    "dept": "EEE",
+    "cgpa": 7.95,
+    "current_offers": 0,
+    "role": "student",
+    "email": "surranveer@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "717439205081",
+    "name": "Chavvi Khurana",
+    "dept": "CSE",
+    "cgpa": 8.03,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sarmamegha@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "128883423657",
+    "name": "Warinder Viswanathan",
+    "dept": "ECE",
+    "cgpa": 9.5,
+    "current_offers": 2,
+    "role": "student",
+    "email": "karanishita@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "982031650210",
+    "name": "Upkaar Apte",
+    "dept": "EEE",
+    "cgpa": 8.52,
+    "current_offers": 1,
+    "role": "student",
+    "email": "doctorindira@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "598506436176",
+    "name": "Ikshita Bobal",
+    "dept": "CSE",
+    "cgpa": 9.05,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ftaneja@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "951371044221",
+    "name": "Arin Sani",
+    "dept": "MECH",
+    "cgpa": 8.96,
+    "current_offers": 0,
+    "role": "student",
+    "email": "osalvi@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "665289639231",
+    "name": "Abhiram Nori",
+    "dept": "EEE",
+    "cgpa": 9.4,
+    "current_offers": 0,
+    "role": "student",
+    "email": "bachittarnarang@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "836856478518",
+    "name": "Michael Dhingra",
+    "dept": "ECE",
+    "cgpa": 9.42,
+    "current_offers": 2,
+    "role": "student",
+    "email": "rdevi@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "443651231309",
+    "name": "Manbir Chauhan",
+    "dept": "MECH",
+    "cgpa": 7.68,
+    "current_offers": 0,
+    "role": "student",
+    "email": "chaudhariabhiram@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "852445205811",
+    "name": "Kalpit Raghavan",
+    "dept": "ECE",
+    "cgpa": 7.71,
+    "current_offers": 1,
+    "role": "student",
+    "email": "eta06@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "640687888969",
+    "name": "Eesha Patla",
+    "dept": "EEE",
+    "cgpa": 8.31,
+    "current_offers": 2,
+    "role": "student",
+    "email": "chatreshramesh@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "546359367017",
+    "name": "Daksha Khanna",
+    "dept": "MECH",
+    "cgpa": 8.02,
+    "current_offers": 2,
+    "role": "student",
+    "email": "varsha23@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "262554506031",
+    "name": "Janya Palan",
+    "dept": "ECE",
+    "cgpa": 7.69,
+    "current_offers": 1,
+    "role": "student",
+    "email": "lrege@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "379861193852",
+    "name": "Leena Oak",
+    "dept": "MECH",
+    "cgpa": 8.32,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ramkavya@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "259457235329",
+    "name": "Jhalak Chokshi",
+    "dept": "EEE",
+    "cgpa": 9.17,
+    "current_offers": 2,
+    "role": "student",
+    "email": "shroffranveer@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "240570746658",
+    "name": "Tanmayi Kanda",
+    "dept": "CSE",
+    "cgpa": 8.54,
+    "current_offers": 2,
+    "role": "student",
+    "email": "hdyal@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "903700930288",
+    "name": "Faras Ganguly",
+    "dept": "EEE",
+    "cgpa": 8.33,
+    "current_offers": 0,
+    "role": "student",
+    "email": "samraunnati@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "508920959461",
+    "name": "Chaaya Misra",
+    "dept": "CSE",
+    "cgpa": 7.7,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ppingle@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "812047776012",
+    "name": "Hredhaan Goyal",
+    "dept": "MECH",
+    "cgpa": 7.77,
+    "current_offers": 0,
+    "role": "student",
+    "email": "meghana03@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "881354227078",
+    "name": "Xalak Kade",
+    "dept": "ECE",
+    "cgpa": 7.74,
+    "current_offers": 1,
+    "role": "student",
+    "email": "bhaktafaris@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "816862648786",
+    "name": "Triveni Prashad",
+    "dept": "EEE",
+    "cgpa": 7.52,
+    "current_offers": 1,
+    "role": "student",
+    "email": "dugaradvay@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "640737445433",
+    "name": "Ekiya Mannan",
+    "dept": "MECH",
+    "cgpa": 9.47,
+    "current_offers": 1,
+    "role": "student",
+    "email": "hayerojasvi@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "954231772593",
+    "name": "Upma Behl",
+    "dept": "CSE",
+    "cgpa": 9.2,
+    "current_offers": 1,
+    "role": "student",
+    "email": "vasatika74@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "523105339129",
+    "name": "Ekta Chopra",
+    "dept": "MECH",
+    "cgpa": 7.51,
+    "current_offers": 1,
+    "role": "student",
+    "email": "tiwarionkar@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "387177424304",
+    "name": "Triya Deo",
+    "dept": "MECH",
+    "cgpa": 8.03,
+    "current_offers": 1,
+    "role": "student",
+    "email": "bimala35@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "325303270426",
+    "name": "Yashawini Deo",
+    "dept": "ECE",
+    "cgpa": 8.69,
+    "current_offers": 0,
+    "role": "student",
+    "email": "garima45@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "218423449545",
+    "name": "Radha Palla",
+    "dept": "EEE",
+    "cgpa": 8.35,
+    "current_offers": 1,
+    "role": "student",
+    "email": "frederickbawa@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "918488866012",
+    "name": "Januja Barman",
+    "dept": "MECH",
+    "cgpa": 7.86,
+    "current_offers": 2,
+    "role": "student",
+    "email": "pushtisama@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "750110206053",
+    "name": "Aarnav Devan",
+    "dept": "EEE",
+    "cgpa": 9.23,
+    "current_offers": 0,
+    "role": "student",
+    "email": "nikitasagar@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "664524610684",
+    "name": "Devansh Suri",
+    "dept": "EEE",
+    "cgpa": 8.65,
+    "current_offers": 1,
+    "role": "student",
+    "email": "nandinigandhi@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "624975147722",
+    "name": "Nachiket Ramakrishnan",
+    "dept": "EEE",
+    "cgpa": 7.8,
+    "current_offers": 1,
+    "role": "student",
+    "email": "lagarwal@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "734060968211",
+    "name": "Pranit Dayal",
+    "dept": "EEE",
+    "cgpa": 9.41,
+    "current_offers": 0,
+    "role": "student",
+    "email": "lopa51@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "594351269822",
+    "name": "Tanvi Guha",
+    "dept": "MECH",
+    "cgpa": 8.45,
+    "current_offers": 0,
+    "role": "student",
+    "email": "rayaanvarma@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "114581196488",
+    "name": "Balhaar Bhattacharyya",
+    "dept": "EEE",
+    "cgpa": 8.36,
+    "current_offers": 0,
+    "role": "student",
+    "email": "qarin84@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "452320308687",
+    "name": "Siddharth Kapadia",
+    "dept": "CSE",
+    "cgpa": 8.62,
+    "current_offers": 0,
+    "role": "student",
+    "email": "routrohan@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "743721038006",
+    "name": "Bimala Tiwari",
+    "dept": "ECE",
+    "cgpa": 7.92,
+    "current_offers": 0,
+    "role": "student",
+    "email": "vsandhu@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "512671045129",
+    "name": "Jacob Lad",
+    "dept": "CSE",
+    "cgpa": 8.84,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sathvik24@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "102069807300",
+    "name": "Ekansh Doshi",
+    "dept": "ECE",
+    "cgpa": 8.6,
+    "current_offers": 0,
+    "role": "student",
+    "email": "damini01@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "301097084417",
+    "name": "Advaith Reddy",
+    "dept": "ECE",
+    "cgpa": 8.12,
+    "current_offers": 0,
+    "role": "student",
+    "email": "krishna01@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "582079748068",
+    "name": "Sneha Hora",
+    "dept": "MECH",
+    "cgpa": 8.93,
+    "current_offers": 2,
+    "role": "student",
+    "email": "vedhika75@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "402363091529",
+    "name": "Yashasvi Mand",
+    "dept": "CSE",
+    "cgpa": 8.04,
+    "current_offers": 1,
+    "role": "student",
+    "email": "nlad@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "755895852790",
+    "name": "Warjas Subramaniam",
+    "dept": "CSE",
+    "cgpa": 8.36,
+    "current_offers": 0,
+    "role": "student",
+    "email": "sneharaman@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "256810788108",
+    "name": "Sudiksha Sule",
+    "dept": "MECH",
+    "cgpa": 8.89,
+    "current_offers": 0,
+    "role": "student",
+    "email": "gopalhans@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "557933584724",
+    "name": "Elijah Rajagopalan",
+    "dept": "ECE",
+    "cgpa": 9.47,
+    "current_offers": 1,
+    "role": "student",
+    "email": "bbhagat@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "551875728238",
+    "name": "Vritti Basak",
+    "dept": "EEE",
+    "cgpa": 8.88,
+    "current_offers": 0,
+    "role": "student",
+    "email": "jeevikabansal@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "507241106024",
+    "name": "Madhav Sekhon",
+    "dept": "EEE",
+    "cgpa": 8.43,
+    "current_offers": 2,
+    "role": "student",
+    "email": "wazir99@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "573464536796",
+    "name": "Gautam Mistry",
+    "dept": "MECH",
+    "cgpa": 8.31,
+    "current_offers": 2,
+    "role": "student",
+    "email": "imittal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "958712359655",
+    "name": "Ira Sidhu",
+    "dept": "ECE",
+    "cgpa": 8.65,
+    "current_offers": 2,
+    "role": "student",
+    "email": "idika02@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "126201408262",
+    "name": "Ladli Gala",
+    "dept": "CSE",
+    "cgpa": 8.48,
+    "current_offers": 1,
+    "role": "student",
+    "email": "umangdubey@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "744546565038",
+    "name": "Riya Jha",
+    "dept": "EEE",
+    "cgpa": 9.08,
+    "current_offers": 2,
+    "role": "student",
+    "email": "wriddhishlalla@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "140326116213",
+    "name": "Charan Mukherjee",
+    "dept": "MECH",
+    "cgpa": 7.65,
+    "current_offers": 2,
+    "role": "student",
+    "email": "ogoyal@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "990320027069",
+    "name": "Bina Chakrabarti",
+    "dept": "MECH",
+    "cgpa": 8.51,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kauryochana@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "789574627620",
+    "name": "Anirudh Ranganathan",
+    "dept": "EEE",
+    "cgpa": 7.61,
+    "current_offers": 0,
+    "role": "student",
+    "email": "senguptamugdha@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "664804879661",
+    "name": "Upasna Boase",
+    "dept": "CSE",
+    "cgpa": 9.04,
+    "current_offers": 2,
+    "role": "student",
+    "email": "baradgautami@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "814497240708",
+    "name": "Veer Devi",
+    "dept": "CSE",
+    "cgpa": 9.23,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sundaramsamuel@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "203558501088",
+    "name": "Nilima Pradhan",
+    "dept": "MECH",
+    "cgpa": 8.39,
+    "current_offers": 1,
+    "role": "student",
+    "email": "lakshit92@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "395764718909",
+    "name": "Aahana Kalla",
+    "dept": "CSE",
+    "cgpa": 7.74,
+    "current_offers": 0,
+    "role": "student",
+    "email": "nathanchauhan@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "222755376726",
+    "name": "Vrinda Bava",
+    "dept": "EEE",
+    "cgpa": 9.45,
+    "current_offers": 1,
+    "role": "student",
+    "email": "jkaul@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "851870053717",
+    "name": "Netra Rana",
+    "dept": "ECE",
+    "cgpa": 9.11,
+    "current_offers": 0,
+    "role": "student",
+    "email": "smanne@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "733079173836",
+    "name": "Ucchal Jayaraman",
+    "dept": "EEE",
+    "cgpa": 8.66,
+    "current_offers": 0,
+    "role": "student",
+    "email": "bnayar@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "755139465299",
+    "name": "Utkarsh Bhavsar",
+    "dept": "EEE",
+    "cgpa": 8.17,
+    "current_offers": 2,
+    "role": "student",
+    "email": "chackohitesh@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "108632267295",
+    "name": "Amaira Sibal",
+    "dept": "EEE",
+    "cgpa": 7.69,
+    "current_offers": 2,
+    "role": "student",
+    "email": "sanayasabharwal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "599692229270",
+    "name": "Naveen Din",
+    "dept": "EEE",
+    "cgpa": 7.84,
+    "current_offers": 0,
+    "role": "student",
+    "email": "onveer28@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "940036481976",
+    "name": "Ethan Koshy",
+    "dept": "EEE",
+    "cgpa": 7.96,
+    "current_offers": 2,
+    "role": "student",
+    "email": "dayamaidalal@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "765202656031",
+    "name": "Dayita Sagar",
+    "dept": "ECE",
+    "cgpa": 7.89,
+    "current_offers": 2,
+    "role": "student",
+    "email": "indrajit53@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "551647648859",
+    "name": "Rajata Goyal",
+    "dept": "MECH",
+    "cgpa": 8.85,
+    "current_offers": 1,
+    "role": "student",
+    "email": "rmani@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "648665803514",
+    "name": "Pushti Gill",
+    "dept": "EEE",
+    "cgpa": 9.2,
+    "current_offers": 0,
+    "role": "student",
+    "email": "csekhon@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "141210434837",
+    "name": "Gunbir Pingle",
+    "dept": "EEE",
+    "cgpa": 7.57,
+    "current_offers": 1,
+    "role": "student",
+    "email": "mekhala21@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "853041328683",
+    "name": "Ikbal Baral",
+    "dept": "EEE",
+    "cgpa": 8.93,
+    "current_offers": 2,
+    "role": "student",
+    "email": "vasudhakota@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "231574083745",
+    "name": "Pallavi Lanka",
+    "dept": "ECE",
+    "cgpa": 7.97,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ethan03@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "882414720746",
+    "name": "Hemal Sandal",
+    "dept": "MECH",
+    "cgpa": 9.26,
+    "current_offers": 2,
+    "role": "student",
+    "email": "gaurikabandi@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "924861717521",
+    "name": "Rohan Yohannan",
+    "dept": "CSE",
+    "cgpa": 7.58,
+    "current_offers": 2,
+    "role": "student",
+    "email": "srinivasanchampak@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "162568781033",
+    "name": "Hiral Banik",
+    "dept": "EEE",
+    "cgpa": 7.83,
+    "current_offers": 2,
+    "role": "student",
+    "email": "umang42@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "308563706178",
+    "name": "Manthan Natt",
+    "dept": "ECE",
+    "cgpa": 9.07,
+    "current_offers": 0,
+    "role": "student",
+    "email": "idani@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "739978647846",
+    "name": "Lakshmi Pillai",
+    "dept": "ECE",
+    "cgpa": 7.8,
+    "current_offers": 0,
+    "role": "student",
+    "email": "sahnibrinda@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "870777633351",
+    "name": "Aradhana Lad",
+    "dept": "MECH",
+    "cgpa": 8.5,
+    "current_offers": 1,
+    "role": "student",
+    "email": "danne@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "633385285714",
+    "name": "Harini Shroff",
+    "dept": "ECE",
+    "cgpa": 8.39,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kghose@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "849119207884",
+    "name": "Owen Kamdar",
+    "dept": "CSE",
+    "cgpa": 9.18,
+    "current_offers": 2,
+    "role": "student",
+    "email": "ukamdar@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "124581638160",
+    "name": "Netra Mane",
+    "dept": "ECE",
+    "cgpa": 8.77,
+    "current_offers": 2,
+    "role": "student",
+    "email": "anirudhkorpal@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "473542905358",
+    "name": "Mahika Divan",
+    "dept": "MECH",
+    "cgpa": 8.04,
+    "current_offers": 2,
+    "role": "student",
+    "email": "chanakyadixit@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "917926112020",
+    "name": "Charita Subramaniam",
+    "dept": "CSE",
+    "cgpa": 9.49,
+    "current_offers": 0,
+    "role": "student",
+    "email": "raagini35@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "743467842652",
+    "name": "Rehaan Krishna",
+    "dept": "MECH",
+    "cgpa": 9.2,
+    "current_offers": 0,
+    "role": "student",
+    "email": "aswamy@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "429412258492",
+    "name": "Manthan Pandit",
+    "dept": "CSE",
+    "cgpa": 9.16,
+    "current_offers": 0,
+    "role": "student",
+    "email": "bhatiaranveer@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "754845603188",
+    "name": "Yatin Gulati",
+    "dept": "MECH",
+    "cgpa": 7.54,
+    "current_offers": 2,
+    "role": "student",
+    "email": "ogour@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "572606228950",
+    "name": "Hredhaan Bhandari",
+    "dept": "EEE",
+    "cgpa": 8.51,
+    "current_offers": 2,
+    "role": "student",
+    "email": "chaayatoor@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "955541310283",
+    "name": "Gaurika Rajagopalan",
+    "dept": "EEE",
+    "cgpa": 9.16,
+    "current_offers": 0,
+    "role": "student",
+    "email": "aahana42@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "826969214902",
+    "name": "Andrew Cherian",
+    "dept": "EEE",
+    "cgpa": 7.99,
+    "current_offers": 1,
+    "role": "student",
+    "email": "jagratisura@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "256146938523",
+    "name": "Chasmum Baral",
+    "dept": "ECE",
+    "cgpa": 7.52,
+    "current_offers": 2,
+    "role": "student",
+    "email": "agole@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "622424302100",
+    "name": "Devansh Dutta",
+    "dept": "ECE",
+    "cgpa": 7.6,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ssant@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "425233070646",
+    "name": "Veda Mall",
+    "dept": "CSE",
+    "cgpa": 9.22,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ynanda@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "130511598710",
+    "name": "Tanveer Mani",
+    "dept": "ECE",
+    "cgpa": 8.58,
+    "current_offers": 1,
+    "role": "student",
+    "email": "devdate@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "482587401907",
+    "name": "Pratyush Pillay",
+    "dept": "EEE",
+    "cgpa": 8.92,
+    "current_offers": 2,
+    "role": "student",
+    "email": "psahota@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "794854691253",
+    "name": "Shaurya Kant",
+    "dept": "EEE",
+    "cgpa": 7.93,
+    "current_offers": 1,
+    "role": "student",
+    "email": "davesaumya@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "856982574291",
+    "name": "Upkaar Bhatti",
+    "dept": "MECH",
+    "cgpa": 7.98,
+    "current_offers": 2,
+    "role": "student",
+    "email": "labanaurora@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "823307425064",
+    "name": "Bachittar Mangal",
+    "dept": "ECE",
+    "cgpa": 8.86,
+    "current_offers": 0,
+    "role": "student",
+    "email": "basaklibni@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "385002064599",
+    "name": "Pallavi Dyal",
+    "dept": "ECE",
+    "cgpa": 8.5,
+    "current_offers": 2,
+    "role": "student",
+    "email": "bakhshikala@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "933244521819",
+    "name": "Daksh Dhar",
+    "dept": "ECE",
+    "cgpa": 8.48,
+    "current_offers": 2,
+    "role": "student",
+    "email": "kraju@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "582200212644",
+    "name": "Shravya Rau",
+    "dept": "ECE",
+    "cgpa": 8.79,
+    "current_offers": 1,
+    "role": "student",
+    "email": "rprabhakar@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "553751570271",
+    "name": "Qasim Narasimhan",
+    "dept": "ECE",
+    "cgpa": 8.66,
+    "current_offers": 2,
+    "role": "student",
+    "email": "barkha63@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "292809216606",
+    "name": "Kabir Korpal",
+    "dept": "ECE",
+    "cgpa": 8.38,
+    "current_offers": 1,
+    "role": "student",
+    "email": "karkrishna@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "210394946051",
+    "name": "Ojasvi Edwin",
+    "dept": "MECH",
+    "cgpa": 8.42,
+    "current_offers": 2,
+    "role": "student",
+    "email": "dev68@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "300449747933",
+    "name": "Ekaja Barad",
+    "dept": "ECE",
+    "cgpa": 8.26,
+    "current_offers": 0,
+    "role": "student",
+    "email": "rattiucchal@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "317116444175",
+    "name": "Pavani Hayer",
+    "dept": "ECE",
+    "cgpa": 8.06,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ekaur@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "888585296277",
+    "name": "Zashil Dyal",
+    "dept": "CSE",
+    "cgpa": 8.22,
+    "current_offers": 2,
+    "role": "student",
+    "email": "ojasbhalla@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "651415469373",
+    "name": "Yamini Batra",
+    "dept": "CSE",
+    "cgpa": 8.19,
+    "current_offers": 2,
+    "role": "student",
+    "email": "earora@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "738502739293",
+    "name": "Vedika Dhingra",
+    "dept": "CSE",
+    "cgpa": 9.06,
+    "current_offers": 0,
+    "role": "student",
+    "email": "meghanamahal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "689577627086",
+    "name": "Parth Tripathi",
+    "dept": "EEE",
+    "cgpa": 9.09,
+    "current_offers": 2,
+    "role": "student",
+    "email": "diptamerchant@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "478741099261",
+    "name": "Rohan Tailor",
+    "dept": "CSE",
+    "cgpa": 8.77,
+    "current_offers": 1,
+    "role": "student",
+    "email": "agaterachita@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "809454146657",
+    "name": "Triveni Muni",
+    "dept": "CSE",
+    "cgpa": 8.93,
+    "current_offers": 1,
+    "role": "student",
+    "email": "vedikasibal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "937854817533",
+    "name": "Anay Mohan",
+    "dept": "MECH",
+    "cgpa": 7.85,
+    "current_offers": 0,
+    "role": "student",
+    "email": "andrew14@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "720107732767",
+    "name": "Yachana Shankar",
+    "dept": "MECH",
+    "cgpa": 8.13,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ssridhar@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "128297791898",
+    "name": "Kashvi Suri",
+    "dept": "CSE",
+    "cgpa": 8.82,
+    "current_offers": 1,
+    "role": "student",
+    "email": "gabaabhimanyu@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "145991362452",
+    "name": "Vaishnavi Bhat",
+    "dept": "EEE",
+    "cgpa": 9.29,
+    "current_offers": 2,
+    "role": "student",
+    "email": "walijason@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "845321124548",
+    "name": "Alka Handa",
+    "dept": "CSE",
+    "cgpa": 8.66,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ronithdoshi@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "611968814456",
+    "name": "Libni Dube",
+    "dept": "CSE",
+    "cgpa": 8.84,
+    "current_offers": 0,
+    "role": "student",
+    "email": "zinaldivan@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "721950855619",
+    "name": "Baljiwan Butala",
+    "dept": "MECH",
+    "cgpa": 9.29,
+    "current_offers": 0,
+    "role": "student",
+    "email": "vartyvanya@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "200793732776",
+    "name": "Harini Shanker",
+    "dept": "ECE",
+    "cgpa": 9.23,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sameshkala@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "153607627557",
+    "name": "Qarin Soni",
+    "dept": "EEE",
+    "cgpa": 8.95,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ysaraf@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "130459632798",
+    "name": "Pallavi Srinivas",
+    "dept": "MECH",
+    "cgpa": 8.99,
+    "current_offers": 1,
+    "role": "student",
+    "email": "saanvi52@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "940942066759",
+    "name": "Janani Sridhar",
+    "dept": "MECH",
+    "cgpa": 8.8,
+    "current_offers": 1,
+    "role": "student",
+    "email": "lukesundaram@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "924042982077",
+    "name": "Nidhi Barad",
+    "dept": "ECE",
+    "cgpa": 9.03,
+    "current_offers": 1,
+    "role": "student",
+    "email": "aarnachoudhary@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "168520349966",
+    "name": "Nandini Gupta",
+    "dept": "CSE",
+    "cgpa": 8.55,
+    "current_offers": 1,
+    "role": "student",
+    "email": "bnarain@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "679657182385",
+    "name": "Kamala Pai",
+    "dept": "MECH",
+    "cgpa": 8.39,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ojasvisrinivas@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "496833968077",
+    "name": "Gauri Hayre",
+    "dept": "MECH",
+    "cgpa": 8.12,
+    "current_offers": 1,
+    "role": "student",
+    "email": "urvashi58@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "829176268757",
+    "name": "Leela Saha",
+    "dept": "EEE",
+    "cgpa": 7.82,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kohlisamuel@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "560251080221",
+    "name": "Ayush Khosla",
+    "dept": "EEE",
+    "cgpa": 8.46,
+    "current_offers": 1,
+    "role": "student",
+    "email": "duagaurika@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "938812255494",
+    "name": "Qadim Lad",
+    "dept": "ECE",
+    "cgpa": 7.5,
+    "current_offers": 0,
+    "role": "student",
+    "email": "gilljyoti@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "203229070732",
+    "name": "Dalaja Chawla",
+    "dept": "MECH",
+    "cgpa": 8.52,
+    "current_offers": 1,
+    "role": "student",
+    "email": "abha47@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "990166008623",
+    "name": "Aarna De",
+    "dept": "CSE",
+    "cgpa": 7.85,
+    "current_offers": 2,
+    "role": "student",
+    "email": "periradhika@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "175936669138",
+    "name": "Rehaan Chakraborty",
+    "dept": "CSE",
+    "cgpa": 8.5,
+    "current_offers": 0,
+    "role": "student",
+    "email": "xborah@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "220000851863",
+    "name": "Aadhya Sarin",
+    "dept": "ECE",
+    "cgpa": 7.53,
+    "current_offers": 1,
+    "role": "student",
+    "email": "thakerorinder@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "906395085801",
+    "name": "Chaman Batra",
+    "dept": "MECH",
+    "cgpa": 8.11,
+    "current_offers": 2,
+    "role": "student",
+    "email": "adya01@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "385067067537",
+    "name": "Mekhala Iyengar",
+    "dept": "EEE",
+    "cgpa": 9.31,
+    "current_offers": 0,
+    "role": "student",
+    "email": "imohanty@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "888610849786",
+    "name": "Atharv Kala",
+    "dept": "MECH",
+    "cgpa": 7.99,
+    "current_offers": 0,
+    "role": "student",
+    "email": "fpalla@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "419689024166",
+    "name": "Charles Lata",
+    "dept": "MECH",
+    "cgpa": 9.07,
+    "current_offers": 1,
+    "role": "student",
+    "email": "rrajagopal@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "584462197401",
+    "name": "William Pau",
+    "dept": "MECH",
+    "cgpa": 9.44,
+    "current_offers": 1,
+    "role": "student",
+    "email": "nathaniel32@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "724646620345",
+    "name": "Libni Sarna",
+    "dept": "MECH",
+    "cgpa": 8.88,
+    "current_offers": 1,
+    "role": "student",
+    "email": "iaurora@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "245418602946",
+    "name": "Henry Gala",
+    "dept": "MECH",
+    "cgpa": 8.64,
+    "current_offers": 0,
+    "role": "student",
+    "email": "faqiddesai@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "482973895931",
+    "name": "Saanvi Barad",
+    "dept": "ECE",
+    "cgpa": 7.96,
+    "current_offers": 0,
+    "role": "student",
+    "email": "pmukherjee@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "152998884240",
+    "name": "Ishaan Bhattacharyya",
+    "dept": "MECH",
+    "cgpa": 7.87,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ganeshadvik@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "808020532839",
+    "name": "Ikshita Edwin",
+    "dept": "CSE",
+    "cgpa": 8.47,
+    "current_offers": 1,
+    "role": "student",
+    "email": "froy@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "482396747986",
+    "name": "Neha Vaidya",
+    "dept": "MECH",
+    "cgpa": 9.18,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sai77@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "164837170683",
+    "name": "Charles Khanna",
+    "dept": "CSE",
+    "cgpa": 9.29,
+    "current_offers": 1,
+    "role": "student",
+    "email": "indaliaggarwal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "409711170844",
+    "name": "Vidhi Gaba",
+    "dept": "MECH",
+    "cgpa": 9.05,
+    "current_offers": 2,
+    "role": "student",
+    "email": "jyoti26@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "118123918264",
+    "name": "Ladli Sachdev",
+    "dept": "MECH",
+    "cgpa": 7.87,
+    "current_offers": 0,
+    "role": "student",
+    "email": "chavvi47@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "292130664813",
+    "name": "Vidhi Master",
+    "dept": "ECE",
+    "cgpa": 7.72,
+    "current_offers": 0,
+    "role": "student",
+    "email": "sneha21@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "896631639979",
+    "name": "Udarsh Kaul",
+    "dept": "ECE",
+    "cgpa": 8.09,
+    "current_offers": 0,
+    "role": "student",
+    "email": "bhavyavenkatesh@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "610240153600",
+    "name": "Gopal Pandey",
+    "dept": "ECE",
+    "cgpa": 8.07,
+    "current_offers": 0,
+    "role": "student",
+    "email": "hwalia@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "529183940045",
+    "name": "Pallavi Hayer",
+    "dept": "EEE",
+    "cgpa": 9.0,
+    "current_offers": 1,
+    "role": "student",
+    "email": "sarmachakradev@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "225414130842",
+    "name": "Chameli Chaudry",
+    "dept": "CSE",
+    "cgpa": 9.15,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kalaparth@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "387215152151",
+    "name": "Hema Sidhu",
+    "dept": "EEE",
+    "cgpa": 8.73,
+    "current_offers": 2,
+    "role": "student",
+    "email": "ctara@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "277228452368",
+    "name": "Vihaan Ram",
+    "dept": "CSE",
+    "cgpa": 7.79,
+    "current_offers": 2,
+    "role": "student",
+    "email": "nbassi@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "974190985251",
+    "name": "Yashasvi Gill",
+    "dept": "MECH",
+    "cgpa": 8.21,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ramaswamysamuel@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "905370322068",
+    "name": "Abhimanyu Sathe",
+    "dept": "EEE",
+    "cgpa": 7.73,
+    "current_offers": 0,
+    "role": "student",
+    "email": "yachanadate@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "632419420669",
+    "name": "Triya Sha",
+    "dept": "MECH",
+    "cgpa": 8.9,
+    "current_offers": 2,
+    "role": "student",
+    "email": "eiravatirout@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "624983980565",
+    "name": "Anamika Sahota",
+    "dept": "EEE",
+    "cgpa": 9.33,
+    "current_offers": 1,
+    "role": "student",
+    "email": "rajagopaltanmayi@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "319051048839",
+    "name": "Lekha Johal",
+    "dept": "MECH",
+    "cgpa": 8.26,
+    "current_offers": 1,
+    "role": "student",
+    "email": "shanda@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "339906140924",
+    "name": "Zansi Wagle",
+    "dept": "EEE",
+    "cgpa": 8.38,
+    "current_offers": 1,
+    "role": "student",
+    "email": "hdara@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "464283296087",
+    "name": "Kevin Sachdev",
+    "dept": "EEE",
+    "cgpa": 8.4,
+    "current_offers": 2,
+    "role": "student",
+    "email": "george60@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "935257734164",
+    "name": "Christopher Deshpande",
+    "dept": "MECH",
+    "cgpa": 8.43,
+    "current_offers": 1,
+    "role": "student",
+    "email": "yashchada@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "992815947754",
+    "name": "Naveen Andra",
+    "dept": "CSE",
+    "cgpa": 7.83,
+    "current_offers": 1,
+    "role": "student",
+    "email": "ishanikaur@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "578747953389",
+    "name": "Upma Natt",
+    "dept": "MECH",
+    "cgpa": 8.82,
+    "current_offers": 2,
+    "role": "student",
+    "email": "sarrafnihal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "897221280002",
+    "name": "Qushi Gole",
+    "dept": "EEE",
+    "cgpa": 8.4,
+    "current_offers": 2,
+    "role": "student",
+    "email": "sreddy@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "519239536755",
+    "name": "Sarthak Kalita",
+    "dept": "MECH",
+    "cgpa": 8.17,
+    "current_offers": 2,
+    "role": "student",
+    "email": "raitheodore@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "154959672129",
+    "name": "Baghyawati Sawhney",
+    "dept": "MECH",
+    "cgpa": 8.32,
+    "current_offers": 2,
+    "role": "student",
+    "email": "rohankarnik@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "256725658364",
+    "name": "Nilima Sura",
+    "dept": "ECE",
+    "cgpa": 8.28,
+    "current_offers": 2,
+    "role": "student",
+    "email": "wishi08@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "544344410471",
+    "name": "Michael Rajagopalan",
+    "dept": "EEE",
+    "cgpa": 7.53,
+    "current_offers": 0,
+    "role": "student",
+    "email": "gaurangi88@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "903881002570",
+    "name": "Jagvi Dugar",
+    "dept": "EEE",
+    "cgpa": 8.2,
+    "current_offers": 1,
+    "role": "student",
+    "email": "indrajitmall@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "163696704952",
+    "name": "Nisha Randhawa",
+    "dept": "EEE",
+    "cgpa": 7.89,
+    "current_offers": 1,
+    "role": "student",
+    "email": "mananpalla@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "720771066195",
+    "name": "Siddharth Bhatt",
+    "dept": "CSE",
+    "cgpa": 8.88,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kapurudant@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "216231001470",
+    "name": "Urvashi Dalal",
+    "dept": "ECE",
+    "cgpa": 8.1,
+    "current_offers": 0,
+    "role": "student",
+    "email": "jmaster@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "148794545299",
+    "name": "Harita Singhal",
+    "dept": "ECE",
+    "cgpa": 9.47,
+    "current_offers": 2,
+    "role": "student",
+    "email": "gauri03@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "500892785812",
+    "name": "Shivani Sagar",
+    "dept": "CSE",
+    "cgpa": 8.38,
+    "current_offers": 2,
+    "role": "student",
+    "email": "dbansal@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "682011099209",
+    "name": "Jack Sampath",
+    "dept": "EEE",
+    "cgpa": 7.82,
+    "current_offers": 2,
+    "role": "student",
+    "email": "kadesimon@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "753423184592",
+    "name": "Rayaan Chaudry",
+    "dept": "ECE",
+    "cgpa": 9.24,
+    "current_offers": 0,
+    "role": "student",
+    "email": "vedhika55@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "734134454932",
+    "name": "Upma Sheth",
+    "dept": "EEE",
+    "cgpa": 8.72,
+    "current_offers": 1,
+    "role": "student",
+    "email": "diyengar@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "337330939551",
+    "name": "Mekhala Bhatt",
+    "dept": "EEE",
+    "cgpa": 8.06,
+    "current_offers": 0,
+    "role": "student",
+    "email": "shivani08@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "674381385223",
+    "name": "Viraj Chaudhry",
+    "dept": "ECE",
+    "cgpa": 8.7,
+    "current_offers": 0,
+    "role": "student",
+    "email": "pushti94@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "439836459041",
+    "name": "Pallavi Bakshi",
+    "dept": "MECH",
+    "cgpa": 9.1,
+    "current_offers": 0,
+    "role": "student",
+    "email": "hamsinibedi@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "768997563352",
+    "name": "Varenya Sekhon",
+    "dept": "CSE",
+    "cgpa": 9.12,
+    "current_offers": 0,
+    "role": "student",
+    "email": "ucchalvohra@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "345784275776",
+    "name": "Jeet Bhardwaj",
+    "dept": "CSE",
+    "cgpa": 9.19,
+    "current_offers": 1,
+    "role": "student",
+    "email": "nsankaran@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "317499962624",
+    "name": "Benjamin Sathe",
+    "dept": "EEE",
+    "cgpa": 9.04,
+    "current_offers": 2,
+    "role": "student",
+    "email": "prasadsara@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "589064359102",
+    "name": "Vaishnavi Dass",
+    "dept": "ECE",
+    "cgpa": 8.91,
+    "current_offers": 1,
+    "role": "student",
+    "email": "mvirk@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "404251080281",
+    "name": "Yahvi Sura",
+    "dept": "EEE",
+    "cgpa": 8.13,
+    "current_offers": 2,
+    "role": "student",
+    "email": "arunimapal@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "161471442973",
+    "name": "Kiaan Batra",
+    "dept": "ECE",
+    "cgpa": 8.95,
+    "current_offers": 1,
+    "role": "student",
+    "email": "harini11@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "984766681607",
+    "name": "Shivansh Magar",
+    "dept": "MECH",
+    "cgpa": 7.98,
+    "current_offers": 1,
+    "role": "student",
+    "email": "shroffsneha@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "711671146490",
+    "name": "Oeshi Bhardwaj",
+    "dept": "CSE",
+    "cgpa": 8.17,
+    "current_offers": 1,
+    "role": "student",
+    "email": "kbarad@example.org",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "621509464428",
+    "name": "Anvi Wali",
+    "dept": "ECE",
+    "cgpa": 8.04,
+    "current_offers": 1,
+    "role": "student",
+    "email": "andrew08@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "690756730787",
+    "name": "Falguni Khosla",
+    "dept": "EEE",
+    "cgpa": 8.08,
+    "current_offers": 2,
+    "role": "student",
+    "email": "jainbhavini@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "104452311918",
+    "name": "Odika Mammen",
+    "dept": "EEE",
+    "cgpa": 8.65,
+    "current_offers": 1,
+    "role": "student",
+    "email": "aarushseth@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "352435148493",
+    "name": "Aradhana Loyal",
+    "dept": "MECH",
+    "cgpa": 9.35,
+    "current_offers": 2,
+    "role": "student",
+    "email": "gganesan@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "181257782883",
+    "name": "Bhanumati Ramesh",
+    "dept": "ECE",
+    "cgpa": 8.11,
+    "current_offers": 2,
+    "role": "student",
+    "email": "vsundaram@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "272900109012",
+    "name": "Eesha Lalla",
+    "dept": "CSE",
+    "cgpa": 9.44,
+    "current_offers": 0,
+    "role": "student",
+    "email": "harrisonchatterjee@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "438322569524",
+    "name": "Vedant Murthy",
+    "dept": "MECH",
+    "cgpa": 8.06,
+    "current_offers": 1,
+    "role": "student",
+    "email": "falanmunshi@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "277970864631",
+    "name": "Kai Vohra",
+    "dept": "MECH",
+    "cgpa": 8.22,
+    "current_offers": 1,
+    "role": "student",
+    "email": "siya84@example.net",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "194200029587",
+    "name": "Jai Natarajan",
+    "dept": "MECH",
+    "cgpa": 9.25,
+    "current_offers": 1,
+    "role": "student",
+    "email": "menonquincy@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "674983673611",
+    "name": "Tristan Varghese",
+    "dept": "CSE",
+    "cgpa": 8.24,
+    "current_offers": 2,
+    "role": "student",
+    "email": "devansh43@example.com",
+    "password": "hashed_password_123"
+  },
+  {
+    "reg_no": "231696506133",
+    "name": "Jeevika Chanda",
+    "dept": "CSE",
+    "cgpa": 8.31,
+    "current_offers": 1,
+    "role": "student",
+    "email": "quincy16@example.net",
+    "password": "hashed_password_123"
+  }
+]

@@ -4,28 +4,32 @@ import { RefreshToken } from '../../models/RefreshToken'
 import { User } from '../../models/User'
 
 export default defineEventHandler(async (event) => {
-  const { email, password } = await readBody(event)
-  const user = await User.findOne({ email }).select('+password')
+  const { user_id, password } = await readBody(event)
+  const user = await User.findOne({ user_id }).select('+password')
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    return { statusCode: 401, message: 'Invalid credentials', role: 'user' }
+    return { statusCode: 401, message: 'Invalid credentials', role: 'student' }
   }
 
   // 1. Generate Tokens
   const accessToken = jwt.sign(
-    { id: user._id, role: user.role },
+    { user_id: user.user_id, role: user.role },
     process.env.NUXT_JWT_ACCESS_SECRET as string,
     {
       expiresIn: '1d',
     },
   )
-  const refreshToken = jwt.sign({ id: user._id }, process.env.NUXT_JWT_REFRESH_SECRET as string, {
-    expiresIn: '7d',
-  })
+  const refreshToken = jwt.sign(
+    { id: user.user_id },
+    process.env.NUXT_JWT_REFRESH_SECRET as string,
+    {
+      expiresIn: '7d',
+    },
+  )
 
   // 2. Save Refresh Token to MongoDB
   await RefreshToken.create({
-    userId: user._id,
+    userId: user.user_id as string,
     token: refreshToken,
     expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
   })

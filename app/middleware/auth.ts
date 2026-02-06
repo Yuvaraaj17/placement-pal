@@ -4,7 +4,6 @@ export default defineNuxtRouteMiddleware((to) => {
 
   // If the cookie doesn't exist, redirect to the login page
   if (!token) {
-    console.log('token not found returning to login page')
     return navigateTo('/login')
   }
 

@@ -42,6 +42,11 @@ const DriveSchema = new Schema(
       type: Date,
       default: Date.now,
     },
+    driveStatus: {
+      type: String,
+      enum: ['yet to start', 'in progress', 'completed'],
+      default: 'yet to start',
+    },
   },
   {
     timestamps: true, // adds createdAt and updatedAt

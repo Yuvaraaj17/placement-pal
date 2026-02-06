@@ -15,10 +15,7 @@ export default defineEventHandler((event) => {
 
     try {
       // 2. Verify the JWT
-      console.log('here', process.env.NUXT_JWT_ACCESS_SECRET)
       const decoded = jwt.verify(token, process.env.NUXT_JWT_ACCESS_SECRET)
-      console.log('decoded', decoded)
-
       // 3. Attach user data to the 'event' so your API routes can use it
       event.context.user = decoded
     } catch (err) {

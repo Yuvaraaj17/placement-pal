@@ -35,32 +35,34 @@ definePageMeta({
 // const supabase = useSupabaseClient() // Supabase client instance for authentication
 
 const form = reactive({
-  email: '',
   password: '',
+  user_id: '',
 }) // Form data
 
 const errors = reactive({
-  email: '',
   password: '',
+  user_id: '',
 }) // Error messages
 
 const isLoading = ref(false) // Loading state for spinner visualization
 
-const isValidEmail = (email: string) => {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-  console.log(re.test(email))
-  return re.test(email)
-} // To validate email format
+const isValidId = (id: string) => {
+  if (id.length > 12 || id.length < 7) {
+    return false
+  }
+
+  return true
+}
 
 const handleLogin = async () => {
-  errors.email = isValidEmail(form.email) ? '' : 'Invalid email'
   errors.password = form.password.length < 6 ? 'Too short' : ''
+  errors.user_id = isValidId(form.user_id) ? '' : 'Invalid Reg No / Admin Id'
 
-  if (errors.email || errors.password) return // Stop if there are validation errors
+  if (errors.user_id || errors.password) return // Stop if there are validation errors
 
   const loginData = {
-    email: form.email,
     password: form.password,
+    user_id: form.user_id,
   } // Prepare login data
 
   isLoading.value = true // Start loading
@@ -75,10 +77,9 @@ const handleLogin = async () => {
 
     // Clear form and errors
     form.password = ''
-    form.email = ''
-    errors.email = ''
+    form.user_id = ''
     errors.password = ''
-    console.log(response)
+    errors.user_id = ''
     if (response.statusCode !== 200) {
       toast.error('Error logging in: ' + response.message) // Show error toast
     } else {
@@ -114,16 +115,16 @@ const handleLogin = async () => {
       <form>
         <div class="grid w-full items-center gap-4">
           <div class="flex flex-col space-y-1.5">
-            <Label for="email">Email</Label>
+            <Label for="email">Reg No / Admin Id :</Label>
             <Input
               id="email"
-              v-model="form.email"
+              v-model="form.user_id"
               type="email"
-              placeholder="mail@example.com"
+              placeholder="710020104037 / EMP1000"
               :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
               :disabled="isLoading"
             />
-            <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.email }}</Muted>
+            <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.user_id }}</Muted>
           </div>
           <div class="flex flex-col space-y-1.5">
             <div class="flex items-center">

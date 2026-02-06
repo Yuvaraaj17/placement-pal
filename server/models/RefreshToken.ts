@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose'
 
 const RefreshTokenSchema = new Schema(
   {
-    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    userId: { type: String, required: true },
     token: { type: String, required: true }, // Store a unique UUID or a hashed JWT
     expiresAt: { type: Date, required: true },
   },

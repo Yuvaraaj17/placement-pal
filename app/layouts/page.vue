@@ -15,14 +15,14 @@ import { toast } from 'vue-sonner'
 
 const token = useCookie('access_token').value
 const user = decodeJWT(token)
-const userRole = user?.role || 'user'
+const userRole = user?.role || 'student'
 
 const items = [
   {
     title: 'Home',
     url: {
       admin: '/admin/home',
-      user: '/home',
+      student: '/home',
     },
     icon: House,
   },
@@ -30,19 +30,17 @@ const items = [
     title: 'Lab',
     url: {
       admin: '/admin/lab',
-      user: '/lab',
+      student: '/lab',
     },
     icon: FlaskConical,
-    role: ['admin', 'user'],
   },
   {
     title: 'Drives',
     url: {
       admin: '/admin/drives',
-      user: '/drives',
+      student: '/drives',
     },
     icon: Calendar,
-    role: ['admin', 'user'],
   },
 ]
 
@@ -83,7 +81,7 @@ const logout = async () => {
               <SidebarMenuItem v-for="item in items" :key="item.title">
                 <SidebarMenuButton as-child>
                   <NuxtLink
-                    :to="userRole === 'admin' ? item.url.admin : item.url.user"
+                    :to="userRole === 'admin' ? item.url.admin : item.url.student"
                     class="flex items-center gap-2"
                   >
                     <component :is="item.icon" />

@@ -1,6 +1,23 @@
-<script setup>
+<script setup lang="ts">
 import { Button } from '@/components/ui/button'
-import { PenLine, CalendarIcon } from 'lucide-vue-next'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
+import { Skeleton } from '@/components/ui/skeleton'
+import { PenLine, CalendarIcon, Search } from 'lucide-vue-next'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { DateFormatter, getLocalTimeZone, today } from '@internationalized/date'
@@ -15,6 +32,9 @@ const isDialogOpen = ref(false)
 
 const isSubmitting = ref(false)
 const isRegistered = ref(false)
+const isLoading = ref(false)
+const search = ref('')
+const driveStatusFilter = ref<'all' | 'yet to start' | 'in progress' | 'completed'>('all')
 
 // const formState = computed(() => {
 //   if (isRegistered.value) return 'registered'
@@ -71,33 +91,112 @@ const resetDriveForm = () => {
   isRegistered.value = false
 }
 
+type RegisterDriveRes = { statusCode: number; message: string }
+
 const registerDriveForm = async () => {
+  isSubmitting.value = true
   const payload = {
     ...driveForm.value,
-    // If date_of_drive exists, convert it. 
+    // If date_of_drive exists, convert it.
     // If it's missing (null/undefined), generate "today" on the fly.
-    date_of_drive: driveForm.value.date_of_drive 
-      ? driveForm.value.date_of_drive.toDate(getLocalTimeZone()) 
-      : today(getLocalTimeZone()).toDate(getLocalTimeZone())
+    date_of_drive: driveForm.value.date_of_drive
+      ? driveForm.value.date_of_drive.toDate(getLocalTimeZone())
+      : today(getLocalTimeZone()).toDate(getLocalTimeZone()),
   }
 
-  const response = await $fetch('/api/admin/drive/register', {
-    method: 'post',
-    body: payload,
-  })
-
-  setTimeout(() => {
-    if (response.statusCode !== 200) {
-      toast.error(response.message)
-    } else {
-      toast.message(response.message)
-    }
-  }, 2000)
+  toast.promise(
+    $fetch<RegisterDriveRes>('/api/admin/drive/register', {
+      method: 'post',
+      body: payload,
+    }),
+    {
+      loading: 'Registering the drive...',
+      success: (data: { message: string }) => {
+        isSubmitting.value = false
+        isDialogOpen.value = false
+        return data.message || 'Drive registered successfully!'
+      },
+      error: (err: { data: { message: string }; message: string }) => {
+        isSubmitting.value = false
+        return err.data?.message || err.message || 'Failed to register drive'
+      },
+      finally: () => {
+        isSubmitting.value = false
+      },
+    },
+  )
 }
 
-watch(isDialogOpen, (newVal) => {
-  if (!newVal) {
-    // dialog closed → clear form
+type DriveDoc = {
+  _id: string
+  company_name: string
+  company_website?: string
+  job_title: string
+  job_description?: string
+  expected_compensation?: number
+  departments?: Record<string, boolean>
+  required_cgpa?: number
+  venue?: string
+  date_of_drive?: string
+  driveStatus?: 'yet to start' | 'in progress' | 'completed'
+  eligibleCount?: number
+  respondedCount?: number
+}
+
+const drives = ref<DriveDoc[]>([])
+
+type DriveRes = { statusCode: number; message: string; data: DriveDoc[] }
+
+const loadDrives = async () => {
+  isLoading.value = true
+  try {
+    const response = await $fetch<DriveRes>('/api/admin/drive/drives' as string, {
+      method: 'get',
+    })
+
+    drives.value = response.data || []
+  } catch (err: unknown) {
+    if (err instanceof Error) toast.error(err?.message || 'Failed to fetch drives')
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const formatDate = (value?: string) => {
+  if (!value) return 'TBD'
+  try {
+    return new Intl.DateTimeFormat('en-IN', { dateStyle: 'medium' }).format(new Date(value))
+  } catch {
+    return 'TBD'
+  }
+}
+
+const driveStatusClasses = (status?: DriveDoc['driveStatus']) => {
+  if (status === 'completed') return 'bg-slate-100 text-slate-700 border-slate-200'
+  if (status === 'in progress') return 'bg-blue-50 text-blue-700 border-blue-200'
+  return 'bg-emerald-50 text-emerald-700 border-emerald-200'
+}
+
+const filteredDrives = computed(() => {
+  const query = search.value.trim().toLowerCase()
+  return drives.value.filter((drive) => {
+    if (driveStatusFilter.value !== 'all' && drive.driveStatus !== driveStatusFilter.value) {
+      return false
+    }
+
+    if (!query) return true
+
+    const haystack = [drive.company_name, drive.job_title, drive.job_description, drive.venue]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase()
+
+    return haystack.includes(query)
+  })
+})
+
+watch(isDialogOpen, (open) => {
+  if (!open) {
     resetDriveForm()
   }
 })
@@ -105,31 +204,52 @@ watch(isDialogOpen, (newVal) => {
 definePageMeta({
   layout: 'page',
 })
+
+onMounted(() => {
+  loadDrives()
+})
 </script>
 <template>
   <div class="flex w-full flex-col gap-5">
-    <div class="flex h-2/5 w-full bg-red-300" />
+    <div class="flex h-2/5 w-full" />
     <div class="flex w-full bg-amber-100 px-5">
-      <Dialog v-model:open="isDialogOpen">
+      <Dialog
+        :open="isDialogOpen"
+        @update:open="
+          (val) => {
+            if (isSubmitting) return
+            isDialogOpen = val
+          }
+        "
+      >
         <DialogTrigger
           class="flex flex-row items-center justify-center gap-3 rounded-sm bg-black px-4 py-2 text-white"
         >
           <span>Register Drive</span>
-          <PenLine size="16" />
+          <PenLine :size="16" />
         </DialogTrigger>
-        <DialogContent class="max-w-4xl min-w-4/5">
+        <DialogContent
+          class="max-h-11/12 max-w-4xl min-w-4/5 overflow-y-scroll"
+          @interact-outside="(e) => isSubmitting && e.preventDefault()"
+          @escape-key-down="(e) => isSubmitting && e.preventDefault()"
+        >
           <DialogTitle>Drive Details</DialogTitle>
-          <DialogDescription
-            >Collect and Registers Drive (All Fields are mandatory)</DialogDescription
-          >
-          <div class="flex flex-row gap-7">
+          <div class="flex flex-row gap-5">
             <Field>
               <FieldLabel>Company Name</FieldLabel>
-              <Input v-model="driveForm.company_name" placeholder="Recruiter" />
+              <Input
+                v-model="driveForm.company_name"
+                placeholder="Recruiter"
+                :disabled="isSubmitting"
+              />
             </Field>
             <Field>
               <FieldLabel>Company Website</FieldLabel>
-              <Input v-model="driveForm.company_website" placeholder="URL of Website" />
+              <Input
+                v-model="driveForm.company_website"
+                placeholder="URL of Website"
+                :disabled="isSubmitting"
+              />
             </Field>
           </div>
           <Field>
@@ -137,6 +257,7 @@ definePageMeta({
             <Input
               v-model="driveForm.job_title"
               placeholder="Ex: Software Engineer, Graduate Trainee"
+              :disabled="isSubmitting"
             />
           </Field>
           <Field>
@@ -146,6 +267,7 @@ definePageMeta({
               placeholder="Job escription..."
               type="textbox"
               class="h-56 resize-none rounded-sm border placeholder:p-2"
+              :disabled="isSubmitting"
             />
           </Field>
           <Field>
@@ -154,6 +276,7 @@ definePageMeta({
               v-model="driveForm.expected_compensation"
               placeholder="Compensation"
               type="number"
+              :disabled="isSubmitting"
             />
           </Field>
           <div class="flex flex-row items-center justify-between">
@@ -163,33 +286,58 @@ definePageMeta({
                 <div class="flex flex-row gap-5">
                   <div class="flex flex-row items-center justify-center gap-3">
                     <Label for="cse">CSE</Label>
-                    <Checkbox id="cse" v-model="driveForm.departments.cse" />
+                    <Checkbox
+                      id="cse"
+                      v-model="driveForm.departments.cse"
+                      :disabled="isSubmitting"
+                    />
                   </div>
                   <div class="flex flex-row items-center justify-center gap-3">
                     <Label for="ece">ECE</Label>
-                    <Checkbox id="ece" v-model="driveForm.departments.ece" />
+                    <Checkbox
+                      id="ece"
+                      v-model="driveForm.departments.ece"
+                      :disabled="isSubmitting"
+                    />
                   </div>
                   <div class="flex flex-row items-center justify-center gap-3">
                     <Label for="eee">EEE</Label>
-                    <Checkbox id="eee" v-model="driveForm.departments.eee" />
+                    <Checkbox
+                      id="eee"
+                      v-model="driveForm.departments.eee"
+                      :disabled="isSubmitting"
+                    />
                   </div>
                   <div class="flex flex-row items-center justify-center gap-3">
                     <Label for="mech">MECH</Label>
-                    <Checkbox id="mech" v-model="driveForm.departments.mech" />
+                    <Checkbox
+                      id="mech"
+                      v-model="driveForm.departments.mech"
+                      :disabled="isSubmitting"
+                    />
                   </div>
                 </div>
               </FieldContent>
             </Field>
             <Field>
               <FieldLabel>CGPA Cutoff</FieldLabel>
-              <Input v-model="driveForm.required_cgpa" type="number" placeholder="CGPA" />
+              <Input
+                v-model="driveForm.required_cgpa"
+                type="number"
+                placeholder="CGPA"
+                :disabled="isSubmitting"
+              />
             </Field>
           </div>
 
           <div class="flex flex-row items-center justify-between gap-7">
             <Field>
               <FieldLabel>Venue/Mode:</FieldLabel>
-              <Input v-model="driveForm.venue" placeholder="Hall No/Virtual" />
+              <Input
+                v-model="driveForm.venue"
+                placeholder="Hall No/Virtual"
+                :disabled="isSubmitting"
+              />
             </Field>
             <Field>
               <FieldLabel> Drive Date: </FieldLabel>
@@ -199,8 +347,12 @@ definePageMeta({
                     <Button
                       variant="outline"
                       :class="
-                        cn('justify-start text-left font-normal', !driveForm.date_of_drive && 'text-muted-foreground')
+                        cn(
+                          'justify-start text-left font-normal',
+                          !driveForm.date_of_drive && 'text-muted-foreground',
+                        )
                       "
+                      :disabled="isSubmitting"
                     >
                       <CalendarIcon />
                       {{
@@ -217,6 +369,7 @@ definePageMeta({
                       layout="month-and-year"
                       :min-value="today(getLocalTimeZone())"
                       initial-focus
+                      :disabled="isSubmitting"
                       @update:model-value="close"
                     />
                   </PopoverContent>
@@ -226,12 +379,109 @@ definePageMeta({
           </div>
 
           <div class="flex flex-row justify-end gap-7">
-            <Button variant="outline" @click="resetDriveForm"> Clear </Button>
-            <Button @click="registerDriveForm"> Register </Button>
+            <Button variant="outline" :disabled="isSubmitting" @click="resetDriveForm">
+              Clear
+            </Button>
+            <Button :disabled="isSubmitting" @click="registerDriveForm"> Register </Button>
             <!-- <Button>Mark as Draft</Button> To Be implemented  -->
           </div>
         </DialogContent>
       </Dialog>
+    </div>
+
+    <div class="flex flex-col gap-3 lg:flex-row lg:items-center">
+      <div class="flex w-full items-center gap-2 rounded-md border px-3 py-2">
+        <Search class="text-muted-foreground h-4 w-4" />
+        <input
+          v-model="search"
+          class="w-full bg-transparent text-sm outline-none"
+          placeholder="Search by company, role, venue..."
+        />
+      </div>
+
+      <div class="flex w-full flex-col gap-2 sm:flex-row">
+        <Select v-model="driveStatusFilter">
+          <SelectTrigger class="w-full sm:w-56">
+            <SelectValue placeholder="Drive status" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All drives</SelectItem>
+            <SelectItem value="yet to start">Yet to start</SelectItem>
+            <SelectItem value="in progress">In progress</SelectItem>
+            <SelectItem value="completed">Completed</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+
+    <Separator />
+
+    <div v-if="isLoading" class="grid gap-4">
+      <Card v-for="n in 3" :key="n">
+        <CardHeader>
+          <Skeleton class="h-5 w-48" />
+          <Skeleton class="mt-2 h-4 w-32" />
+        </CardHeader>
+        <CardContent class="space-y-2">
+          <Skeleton class="h-4 w-full" />
+          <Skeleton class="h-4 w-2/3" />
+        </CardContent>
+        <CardFooter class="flex gap-2">
+          <Skeleton class="h-9 w-24" />
+          <Skeleton class="h-9 w-24" />
+        </CardFooter>
+      </Card>
+    </div>
+
+    <div v-else class="grid h-full gap-4 overflow-y-scroll">
+      <Card v-if="filteredDrives.length === 0">
+        <CardHeader>
+          <CardTitle class="text-lg">No drives found</CardTitle>
+          <CardDescription>
+            Try updating your filters or check back later for new drives.
+          </CardDescription>
+        </CardHeader>
+      </Card>
+
+      <Card v-for="item in filteredDrives" :key="item._id" class="h-fit border-slate-200">
+        <CardHeader class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <div>
+            <CardTitle class="text-xl">{{ item.company_name }}</CardTitle>
+            <CardDescription class="text-sm">
+              {{ item.job_title }} - {{ item.venue || 'Venue TBD' }}
+            </CardDescription>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="rounded-full border px-3 py-1 text-xs font-medium"
+              :class="driveStatusClasses(item.driveStatus)"
+            >
+              {{ item.driveStatus || 'yet to start' }}
+            </span>
+            <span
+              class="rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700"
+            >
+              Eligible: {{ item.eligibleCount ?? 0 }}
+            </span>
+            <span
+              class="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
+            >
+              Responded: {{ item.respondedCount ?? 0 }}
+            </span>
+          </div>
+        </CardHeader>
+        <CardContent class="text-muted-foreground space-y-3 text-sm">
+          <p v-if="item.job_description">{{ item.job_description }}</p>
+          <div class="flex flex-wrap gap-4">
+            <span>Drive Date: {{ formatDate(item.date_of_drive) }}</span>
+            <span>CGPA Cutoff: {{ item.required_cgpa ?? 'N/A' }}</span>
+            <span>
+              Expected Compensation:
+              {{ item.expected_compensation ? `${item.expected_compensation} LPA` : 'N/A' }}
+            </span>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   </div>
 </template>
