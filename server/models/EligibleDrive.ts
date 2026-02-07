@@ -5,6 +5,7 @@ const EligibilitySchema = new Schema(
     studentUserId: { type: String, required: true },
     driveId: { type: Schema.Types.ObjectId, ref: 'Drive', required: true },
     status: { type: String, enum: ['unseen', 'not willing', 'willing'], default: 'unseen' },
+    driveUpdated: { type: Boolean, default: false },
   },
   { timestamps: true },
 )

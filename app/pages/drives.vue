@@ -46,6 +46,7 @@ type EligibilityDoc = {
   studentUserId: string
   driveId: DriveDoc | null
   status: 'unseen' | 'willing' | 'not willing'
+  driveUpdated?: boolean
   createdAt?: string
 }
 
@@ -254,6 +255,18 @@ onMounted(() => {
               :class="statusBadgeClasses(item.status)"
             >
               {{ item.status }}
+            </span>
+            <span
+              v-if="item.status === 'unseen' && !item.driveUpdated"
+              class="rounded-full border px-3 py-1 text-xs font-medium bg-sky-50 text-sky-700 border-sky-200"
+            >
+              New
+            </span>
+            <span
+              v-if="item.driveUpdated"
+              class="rounded-full border px-3 py-1 text-xs font-medium bg-indigo-50 text-indigo-700 border-indigo-200"
+            >
+              Drive Updated
             </span>
             <span
               class="rounded-full border px-3 py-1 text-xs font-medium"
