@@ -306,6 +306,43 @@ const driveStatusClasses = (status?: DriveDoc['driveStatus']) => {
   return 'bg-emerald-50 text-emerald-700 border-emerald-200'
 }
 
+const totalDrives = computed(() => drives.value.length)
+const totalEligible = computed(() =>
+  drives.value.reduce((sum, drive) => sum + (drive.eligibleCount ?? 0), 0),
+)
+const totalResponded = computed(() =>
+  drives.value.reduce((sum, drive) => sum + (drive.respondedCount ?? 0), 0),
+)
+const responseRate = computed(() => {
+  if (totalEligible.value === 0) return 0
+  return Math.round((totalResponded.value / totalEligible.value) * 100)
+})
+
+const metricArc = (value: number, max: number) => {
+  const radius = 36
+  const circumference = 2 * Math.PI * radius
+  const arcLength = circumference * 0.75
+  const ratio = max > 0 ? Math.min(value / max, 1) : 0
+  const filled = arcLength * ratio
+  return {
+    radius,
+    arcLength,
+    dasharray: `${filled} ${arcLength}`,
+  }
+}
+
+const metricCircle = (value: number, max: number) => {
+  const radius = 36
+  const circumference = 2 * Math.PI * radius
+  const ratio = max > 0 ? Math.min(value / max, 1) : 0
+  const filled = circumference * ratio
+  return {
+    radius,
+    circumference,
+    dasharray: `${filled} ${circumference}`,
+  }
+}
+
 const filteredDrives = computed(() => {
   const query = search.value.trim().toLowerCase()
   return drives.value.filter((drive) => {
@@ -340,7 +377,103 @@ onMounted(() => {
 </script>
 <template>
   <div class="flex w-full flex-col gap-5 p-5">
-    <div class="flex h-2/5 w-full" />
+    <div class="grid w-full gap-4 rounded-xl border bg-white p-5 lg:grid-cols-3">
+      <div class="flex items-center gap-4">
+        <div class="relative h-24 w-24">
+          <svg class="h-24 w-24">
+            <circle
+              class="stroke-emerald-500"
+              :r="metricArc(totalDrives, Math.max(totalDrives, 1)).radius"
+              cx="48"
+              cy="48"
+              fill="transparent"
+              stroke-width="8"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <div class="text-xl font-semibold">{{ totalDrives }}</div>
+            <div class="text-xs text-muted-foreground">Drives</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-sm text-muted-foreground">Total Drives</div>
+          <div class="text-lg font-semibold">All time</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="relative h-24 w-24">
+          <svg class="h-24 w-24 -rotate-90">
+            <circle
+              class="stroke-slate-100"
+              :r="metricCircle(100, 100).radius"
+              cx="48"
+              cy="48"
+              fill="transparent"
+              stroke-width="8"
+            />
+            <circle
+              class="stroke-amber-500"
+              :r="metricCircle(totalEligible, Math.max(totalDrives, 1)).radius"
+              cx="48"
+              cy="48"
+              fill="transparent"
+              stroke-width="8"
+              stroke-linecap="round"
+              :stroke-dasharray="metricCircle(totalEligible, Math.max(totalDrives, 1)).dasharray"
+            />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <div class="text-lg font-semibold">
+              {{ totalEligible }} / {{ totalDrives }}
+            </div>
+            <div class="text-xs text-muted-foreground">Eligible</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-sm text-muted-foreground">Eligible Students</div>
+          <div class="text-lg font-semibold">Across drives</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <div class="relative h-24 w-24">
+          <svg class="h-24 w-24 -rotate-90">
+            <circle
+              class="stroke-slate-100"
+              :r="metricCircle(100, 100).radius"
+              cx="48"
+              cy="48"
+              fill="transparent"
+              stroke-width="8"
+            />
+            <circle
+              class="stroke-blue-500"
+              :r="metricCircle(responseRate, 100).radius"
+              cx="48"
+              cy="48"
+              fill="transparent"
+              stroke-width="8"
+              stroke-linecap="round"
+              :stroke-dasharray="metricCircle(responseRate, 100).dasharray"
+            />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+            <div class="text-lg font-semibold">{{ responseRate }}%</div>
+            <div class="text-xs text-muted-foreground">
+              {{ totalResponded }} / {{ totalEligible }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="text-sm text-muted-foreground">Response Rate</div>
+          <div class="text-lg font-semibold">
+            {{ totalResponded }} / {{ totalEligible }}
+          </div>
+        </div>
+      </div>
+    </div>
 
     <Dialog :open="isEditDialogOpen" @update:open="handleEditDialogOpenChange">
       <DialogContent
