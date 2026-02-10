@@ -1,0 +1,185 @@
+[
+  {
+    "question_id": "PTR_001",
+    "question": "What does a pointer store in C?",
+    "answer": "Address of a variable",
+    "option_a": "Value of a variable",
+    "option_b": "Address of a variable",
+    "option_c": "Data type of a variable",
+    "option_d": "Size of a variable",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": null
+  },
+  {
+    "question_id": "PTR_002",
+    "question": "Which operator is used to access the value stored at the address held by a pointer?",
+    "answer": "* (dereference operator)",
+    "option_a": "& (address-of operator)",
+    "option_b": "* (dereference operator)",
+    "option_c": "-> (arrow operator)",
+    "option_d": "[] (subscript operator)",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "698826a6b3b95ee2e5005bdb"
+  },
+  {
+    "question_id": "PTR_003",
+    "question": "If int x = 10; int *p = &x; what is the value of *p?",
+    "answer": "10",
+    "option_a": "Address of x",
+    "option_b": "10",
+    "option_c": "Garbage value",
+    "option_d": "Size of x",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "698826a6b3b95ee2e5005bdb"
+  },
+  {
+    "question_id": "PTR_004",
+    "question": "What is the correct way to declare a pointer to an integer in C?",
+    "answer": "int *p;",
+    "option_a": "int p*;",
+    "option_b": "int *p;",
+    "option_c": "pointer int p;",
+    "option_d": "int &p;",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "698826a6b3b95ee2e5005bdb"
+  },
+  {
+    "question_id": "PTR_005",
+    "question": "Which of the following is a common reason a program crashes when using pointers?",
+    "answer": "Dereferencing an uninitialized pointer",
+    "option_a": "Using printf()",
+    "option_b": "Declaring too many variables",
+    "option_c": "Dereferencing an uninitialized pointer",
+    "option_d": "Using switch-case",
+    "difficulty": "Medium",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "698826a6b3b95ee2e5005bdb"
+  },
+
+  {
+    "question_id": "FUN_001",
+    "question": "What is the return type of a function that does not return any value?",
+    "answer": "void",
+    "option_a": "int",
+    "option_b": "null",
+    "option_c": "void",
+    "option_d": "empty",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "698826a6b3b95ee2e5005bdb"
+  },
+  {
+    "question_id": "FUN_002",
+    "question": "Which of the following correctly declares a function that takes two integers and returns an integer?",
+    "answer": "int add(int a, int b);",
+    "option_a": "add(int a, int b);",
+    "option_b": "int add(int a, int b);",
+    "option_c": "function int add(a, b);",
+    "option_d": "int add(a, b);",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "69882870b3b95ee2e5005bdc"
+  },
+  {
+    "question_id": "FUN_003",
+    "question": "What is the main purpose of a function prototype in C?",
+    "answer": "To inform the compiler about a function's name, return type, and parameters before it is used",
+    "option_a": "To execute the function automatically",
+    "option_b": "To allocate memory for the function",
+    "option_c": "To inform the compiler about a function's name, return type, and parameters before it is used",
+    "option_d": "To print the function output",
+    "difficulty": "Medium",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "69882870b3b95ee2e5005bdc"
+  },
+  {
+    "question_id": "FUN_004",
+    "question": "In C, function arguments are passed by default using which method?",
+    "answer": "Pass by value",
+    "option_a": "Pass by value",
+    "option_b": "Pass by reference",
+    "option_c": "Pass by pointer only",
+    "option_d": "Pass by address automatically",
+    "difficulty": "Medium",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "69882870b3b95ee2e5005bdc"
+  },
+  {
+    "question_id": "FUN_005",
+    "question": "Which technique is commonly used in C to modify a variable in the caller function?",
+    "answer": "Passing the address of the variable using pointers",
+    "option_a": "Using global variables only",
+    "option_b": "Returning multiple values directly",
+    "option_c": "Passing the address of the variable using pointers",
+    "option_d": "Using scanf inside the function",
+    "difficulty": "Hard",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "69882870b3b95ee2e5005bdc"
+  },
+
+  {
+    "question_id": "CS_001",
+    "question": "Which control structure is used to execute a block of code only if a condition is true?",
+    "answer": "if statement",
+    "option_a": "for loop",
+    "option_b": "if statement",
+    "option_c": "break statement",
+    "option_d": "continue statement",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "6988289fb3b95ee2e5005bdd"
+  },
+  {
+    "question_id": "CS_002",
+    "question": "Which loop is guaranteed to execute at least once?",
+    "answer": "do-while loop",
+    "option_a": "for loop",
+    "option_b": "while loop",
+    "option_c": "do-while loop",
+    "option_d": "nested loop",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "6988289fb3b95ee2e5005bdd"
+  },
+  {
+    "question_id": "CS_003",
+    "question": "Which keyword is used to immediately exit from a loop?",
+    "answer": "break",
+    "option_a": "stop",
+    "option_b": "exit",
+    "option_c": "break",
+    "option_d": "return",
+    "difficulty": "Easy",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "6988289fb3b95ee2e5005bdd"
+  },
+  {
+    "question_id": "CS_004",
+    "question": "What will the following code print? for(int i=0;i<3;i++){ printf(\"%d \", i); }",
+    "answer": "0 1 2",
+    "option_a": "1 2 3",
+    "option_b": "0 1 2",
+    "option_c": "0 1 2 3",
+    "option_d": "2 1 0",
+    "difficulty": "Medium",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "6988289fb3b95ee2e5005bdd"
+  },
+  {
+    "question_id": "CS_005",
+    "question": "Which statement skips the rest of the current loop iteration and moves to the next iteration?",
+    "answer": "continue",
+    "option_a": "skip",
+    "option_b": "next",
+    "option_c": "continue",
+    "option_d": "break",
+    "difficulty": "Medium",
+    "skill_code": "6988262bb3b95ee2e5005bd8",
+    "sub_skill_code": "6988289fb3b95ee2e5005bdd"
+  }
+]
+
