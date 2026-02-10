@@ -1,5 +1,8 @@
 <template>
-    <div class="skills-page min-h-screen w-full">
+    <div
+        class="min-h-screen w-full text-slate-900"
+        :style="pageStyle"
+    >
         <div class="mx-auto w-full max-w-6xl px-5 py-8">
             <div class="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                 <div>
@@ -28,15 +31,16 @@
                                 </TabsList>
                                 <TabsContent value="skills" class="flex flex-col gap-4">
                                     <Input placeholder="Skill Name" v-model="skill.skill_name"/>
-                                    <Textarea placeholder="Skill Description" class="resize-none" />
+                                    <Textarea placeholder="Skill Description" class="resize-none" v-model="skill.skill_description" />
                                     <Button :disabled="isSubmitting" @click="addSkill">
                                         <Spinner v-if="isLoading" />
                                         Add Skill
                                     </Button>
+                                    <Button variant="outline" @click="resetSkillForm">Reset</Button>
                                 </TabsContent>
                                 <TabsContent value="subskills" class="flex flex-col gap-4">
                                     <Select v-model="sub_skill.skill_id">
-                                        <SelectTrigger>
+                                        <SelectTrigger class="w-full">
                                             <SelectValue placeholder="Select a Skill" />
                                         </SelectTrigger>
                                         <SelectContent>
@@ -45,11 +49,12 @@
                                         </SelectContent>
                                     </Select>
                                     <Input placeholder="Sub Skill Name" v-model="sub_skill.sub_skill_name" />
-                                    <Textarea placeholder="Sub Skill Description" class="resize-none" />
+                                    <Textarea placeholder="Sub Skill Description" class="resize-none" v-model="sub_skill.sub_skill_description" />
                                     <Button :disabled="isSubmitting" @click="addSubSkill">
                                         <Spinner v-if="isLoading" />
                                         Add Sub Skill
                                     </Button>
+                                    <Button variant="outline" @click="resetSubSkillForm">Reset</Button>
                                 </TabsContent>
                             </Tabs>
                         </SheetContent>
@@ -58,21 +63,21 @@
             </div>
 
             <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                <div class="stat-card">
-                    <p class="stat-label">Total Skills</p>
-                    <p class="stat-value">{{ totalSkills }}</p>
+                <div class="rounded-xl border border-slate-900 bg-white px-4 py-3 shadow-[4px_4px_0_#0f172a]">
+                    <p class="text-xs uppercase tracking-[0.18em] text-slate-600">Total Skills</p>
+                    <p class="mt-1.5 text-[22px] font-semibold">{{ totalSkills }}</p>
                 </div>
-                <div class="stat-card">
-                    <p class="stat-label">Total Subskills</p>
-                    <p class="stat-value">{{ totalSubskills }}</p>
+                <div class="rounded-xl border border-slate-900 bg-white px-4 py-3 shadow-[4px_4px_0_#0f172a]">
+                    <p class="text-xs uppercase tracking-[0.18em] text-slate-600">Total Subskills</p>
+                    <p class="mt-1.5 text-[22px] font-semibold">{{ totalSubskills }}</p>
                 </div>
-                <div class="stat-card">
-                    <p class="stat-label">Total Questions</p>
-                    <p class="stat-value">{{ totalQuestions }}</p>
+                <div class="rounded-xl border border-slate-900 bg-white px-4 py-3 shadow-[4px_4px_0_#0f172a]">
+                    <p class="text-xs uppercase tracking-[0.18em] text-slate-600">Total Questions</p>
+                    <p class="mt-1.5 text-[22px] font-semibold">{{ totalQuestions }}</p>
                 </div>
-                <div class="stat-card">
-                    <p class="stat-label">Unassigned Subskills</p>
-                    <p class="stat-value">{{ unassignedSubskills }}</p>
+                <div class="rounded-xl border border-slate-900 bg-white px-4 py-3 shadow-[4px_4px_0_#0f172a]">
+                    <p class="text-xs uppercase tracking-[0.18em] text-slate-600">Unassigned Subskills</p>
+                    <p class="mt-1.5 text-[22px] font-semibold">{{ unassignedSubskills }}</p>
                 </div>
             </div>
 
@@ -80,8 +85,8 @@
                 <div class="flex items-center gap-4 justify-between">
                     <p class="text-sm font-semibold text-slate-800">Skill Data Table</p>
                     <div class="flex items-center gap-2 text-xs text-slate-500">
-                        <span class="status-dot status-active"></span> Active
-                        <span class="status-dot status-pending"></span> Pending
+                        <span class="inline-block h-2 w-2 rounded-full border border-slate-900 bg-emerald-200"></span> Active
+                        <span class="inline-block h-2 w-2 rounded-full border border-slate-900 bg-amber-200"></span> Pending
                     </div>
                 </div>
                 <div class="mt-3 overflow-x-auto rounded-lg border border-black bg-white">
@@ -148,12 +153,14 @@ definePageMeta({
 })
 
 const skill = ref({
-    skill_name: ''
+    skill_name: '',
+    skill_description: ''
 })
 
 const sub_skill = ref({
     skill_id: null,
-    sub_skill_name: ''
+    sub_skill_name: '',
+    sub_skill_description: ''
 })
 
 const isSubmitting = ref(false)
@@ -176,14 +183,22 @@ const unassignedSubskills = computed(() => {
     return unassigned?.rows?.length || 0
 })
 
+const pageStyle = {
+    background:
+        'radial-gradient(800px 300px at 10% -10%, rgba(245, 158, 11, 0.25), transparent 60%),' +
+        'radial-gradient(700px 260px at 90% -20%, rgba(14, 116, 144, 0.2), transparent 60%),' +
+        '#f6f4ef',
+    fontFamily: '"Space Grotesk","Segoe UI",system-ui,sans-serif',
+}
+
 
 
 const resetSkillForm = () => {
-    skill.value = { skill_name: '' }
+    skill.value = { skill_name: '', skill_description: '' }
 }
 
 const resetSubSkillForm = () => {
-    sub_skill.value = { skill_id: null, sub_skill_name: '' }
+    sub_skill.value = { skill_id: null, sub_skill_name: '', sub_skill_description: '' }
 }
 
 const addSkill = async () => {
@@ -287,82 +302,13 @@ onMounted(async () => {
 })
 
 const statusClass = (status) => {
-    if (!status) return 'status-pill status-unknown'
+    const base = 'inline-flex items-center justify-center rounded-full border border-slate-900 px-2.5 py-0.5 text-xs capitalize'
+    if (!status) return `${base} bg-slate-200 text-slate-700`
     const normalized = String(status).toLowerCase()
-    if (normalized === 'active') return 'status-pill status-active'
-    if (normalized === 'pending') return 'status-pill status-pending'
-    return 'status-pill status-unknown'
+    if (normalized === 'active') return `${base} bg-emerald-200 text-emerald-800`
+    if (normalized === 'pending') return `${base} bg-amber-200 text-amber-900`
+    return `${base} bg-slate-200 text-slate-700`
 }
 
 
 </script>
-
-<style scoped>
-.skills-page {
-    --bg: #f6f4ef;
-    --ink: #0f172a;
-    background:
-        radial-gradient(800px 300px at 10% -10%, rgba(245, 158, 11, 0.25), transparent 60%),
-        radial-gradient(700px 260px at 90% -20%, rgba(14, 116, 144, 0.2), transparent 60%),
-        var(--bg);
-    font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
-    color: var(--ink);
-}
-
-.stat-card {
-    border: 1px solid #0f172a;
-    background: #ffffff;
-    padding: 14px 16px;
-    border-radius: 12px;
-    box-shadow: 4px 4px 0 #0f172a;
-}
-
-.stat-label {
-    font-size: 12px;
-    color: #475569;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-}
-
-.stat-value {
-    margin-top: 6px;
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.status-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2px 10px;
-    border-radius: 999px;
-    border: 1px solid #0f172a;
-    font-size: 12px;
-    text-transform: capitalize;
-}
-
-.status-active {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.status-pending {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-.status-unknown {
-    background: #e2e8f0;
-    color: #334155;
-}
-
-.status-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 999px;
-    margin-left: 8px;
-    margin-right: 4px;
-    border: 1px solid #0f172a;
-}
-</style>

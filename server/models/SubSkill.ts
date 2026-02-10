@@ -5,7 +5,8 @@ const SubSkillSchema = new Schema(
     skill_id: { type: Schema.Types.ObjectId, ref: 'Skill', required: false, index: true },
     sub_skill_code: { type: String, required: true, trim: true },
     sub_skill_name: { type: String, required: true, trim: true },
-    status: { type: String },
+    sub_skill_status: { type: Boolean, default: true },
+    sub_skill_description: { type: String, default: ''}
   },
   { timestamps: true, collection: 'subskills' },
 )
