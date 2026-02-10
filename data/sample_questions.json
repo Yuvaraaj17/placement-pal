@@ -1,0 +1,47 @@
+[
+  {
+    "question_text": "What is 2 + 2?",
+    "answer": "4",
+    "option_a": "3",
+    "option_b": "4",
+    "option_c": "5",
+    "option_d": "6",
+    "difficulty": "easy"
+  },
+  {
+    "question_text": "Which data structure uses FIFO order?",
+    "answer": "Queue",
+    "option_a": "Stack",
+    "option_b": "Queue",
+    "option_c": "Tree",
+    "option_d": "Graph",
+    "difficulty": "easy"
+  },
+  {
+    "question_text": "What is the time complexity of binary search?",
+    "answer": "O(log n)",
+    "option_a": "O(n)",
+    "option_b": "O(log n)",
+    "option_c": "O(n log n)",
+    "option_d": "O(1)",
+    "difficulty": "medium"
+  },
+  {
+    "question_text": "Which HTTP status code means Not Found?",
+    "answer": "404",
+    "option_a": "200",
+    "option_b": "301",
+    "option_c": "404",
+    "option_d": "500",
+    "difficulty": "easy"
+  },
+  {
+    "question_text": "In JavaScript, what does NaN stand for?",
+    "answer": "Not a Number",
+    "option_a": "New and Null",
+    "option_b": "Not a Number",
+    "option_c": "Name as Number",
+    "option_d": "Null as Number",
+    "difficulty": "easy"
+  }
+]

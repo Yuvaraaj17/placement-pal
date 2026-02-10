@@ -1,6 +1,9 @@
 export default defineEventHandler(async () => {
-    const data = await Skill.find({skill_status: true})
+    await connectDB()
+    const data = await Skill.find({})
+        .select('_id skill_name skill_code skill_description skill_status')
+        .sort({ skill_name: 1 })
+        .lean()
 
-    if(data && data.length)
-        return { statusCode : 200 , message: 'Skills fetched succesfully', data: data}
+    return { statusCode : 200 , message: 'Skills fetched succesfully', data: data || [] }
 })

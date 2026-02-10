@@ -35,7 +35,9 @@ export default defineEventHandler(async () => {
 
           sub_skill_id: '$subskills._id',
           sub_skill_name: '$subskills.sub_skill_name', // or "$subskills.name"
-          sub_skill_status: '$subskills.status', // or "$subskills.sub_skill_status"
+          sub_skill_status: {
+            $cond: [{ $eq: ['$subskills.sub_skill_status', true] }, 'active', 'inactive'],
+          },
           question_count: {
             $cond: [{ $ifNull: ['$subskills._id', false] }, { $size: '$qs' }, 0],
           },
@@ -135,7 +137,9 @@ export default defineEventHandler(async () => {
                     $push: {
                       sub_skill_id: '$_id',
                       sub_skill_name: '$sub_skill_name', // or "$name"
-                    sub_skill_status: '$status', // or your status field
+                    sub_skill_status: {
+                      $cond: [{ $eq: ['$sub_skill_status', true] }, 'active', 'inactive'],
+                    },
                     question_count: { $size: '$qs' },
                   },
                 },

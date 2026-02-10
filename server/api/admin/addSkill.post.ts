@@ -3,16 +3,19 @@ import { Counter } from "~~/server/models/Counter"
 export default defineEventHandler(async (event) => {
     await connectDB()
 
-    const { skill_name } = await readBody(event)
+    const { skill_name, skill_description } = await readBody(event)
 
     const payload = {
         skill_code : '',
-        skill_name : ''
+        skill_name : '',
+        skill_description: '',
+        skill_status: true
     }
 
     try {
         payload.skill_code = await formSkillCode();
         payload.skill_name = skill_name
+        payload.skill_description = skill_description ?? ''
         await Skill.insertOne(payload)
     } catch ( err : unknown) {
         if(err instanceof Error) {

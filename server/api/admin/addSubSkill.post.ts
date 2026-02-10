@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const { skill_id, sub_skill_name } = await readBody(event)
 
     const payload: Record<string, unknown> = {
-        skill_id: skill_id ?? null,
+        skill_id: skill_id && skill_id !== 'null' ? skill_id : null,
         sub_skill_code : '',
         sub_skill_name : ''
     }
