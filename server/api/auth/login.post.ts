@@ -11,6 +11,10 @@ export default defineEventHandler(async (event) => {
     return { statusCode: 401, message: 'Invalid credentials', role: 'student' }
   }
 
+  if (user.email && user.email_verified === false) {
+    return { statusCode: 403, message: 'Please verify your email before logging in.', role: user.role }
+  }
+
   // 1. Generate Tokens
   const accessToken = jwt.sign(
     { user_id: user.user_id, role: user.role },

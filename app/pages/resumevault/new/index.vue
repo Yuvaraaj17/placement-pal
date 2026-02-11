@@ -2,10 +2,71 @@
 import { hardSkills, softSkills, type Skill } from '~/assets/data/consts'
 import { Check, PlusIcon, Trash2, X } from 'lucide-vue-next'
 import Checkbox from '~/components/ui/checkbox/Checkbox.vue'
+import { Button } from '@/components/ui/button'
+import { toast } from 'vue-sonner'
 
 definePageMeta({
   layout: 'page',
+  middleware: 'auth',
 })
+
+interface Experience {
+  job_title: string
+  company: string
+  from_month: string
+  from_year: string
+  to_month: string
+  to_year: string
+  job_location: string
+  responsibilities: string
+}
+
+interface Education {
+  degree: string
+  institution_name: string
+  year: number | string
+}
+
+interface Project {
+  project_title: string
+  project_description: string
+  tech_stack: string
+  link: string
+}
+
+interface ResumeSkill {
+  id: string
+  skill: string
+}
+
+interface ResumeContent {
+  personalInfo: {
+    name: string
+    phone_code: string
+    phone_number: string
+    email: string
+    location: string
+    linkedin: string
+    github: string
+  }
+  summary: {
+    pref_role: string
+    summary: string
+  }
+  skills: ResumeSkill[]
+  experienceList: Experience[]
+  educationList: Education[]
+  projectsList: Project[]
+  isCurrent: boolean
+  isFresher: boolean
+}
+
+const route = useRoute()
+const resumeId = computed(() =>
+  typeof route.query.resumeId === 'string' ? route.query.resumeId : '',
+)
+const isLoading = ref(false)
+const isSaving = ref(false)
 
 const previewRef = ref<HTMLDivElement | null>(null)
 const isOverflowing = ref<boolean>(false)
@@ -25,52 +86,121 @@ const summary = reactive({
   summary: '',
 })
 
-const form = ref({
-  // Personal Info
-  name: '',
-  phone: '',
-  email: '',
-  linkedin: '',
-  github: '',
-  location: '',
-  // Summary
-  summary: '',
-  preferred_role: '',
-  // Skills
-  hard_skills: '',
-  soft_skills: '',
-  tools_tech: '',
-  // Experience
-  exp_job_title: '',
-  exp_company: '',
-  exp_dates: '',
-  exp_location: '',
-  exp_responsibilities: '',
-  exp_achievements: '',
-  exp_from_month: '',
-  exp_from_year: '',
-  exp_to_month: '',
-  exp_to_year: '',
-  // Education
-  edu_degree: '',
-  edu_institute: '',
-  edu_year: '',
-  // Projects
-  proj_title: '',
-  proj_tech: '',
-  proj_description: '',
-  proj_link: '',
-  // Certifications
-  cert_title: '',
-  cert_org: '',
-  cert_date: '',
-  // Keywords
-  keyword_title: '',
-  jd_text: '',
+const resumeTitle = computed(() =>
+  personalInfo.name ? `${personalInfo.name} Resume` : 'Untitled Resume',
+)
+
+const buildResumePayload = (): ResumeContent => ({
+  personalInfo: { ...personalInfo },
+  summary: { ...summary },
+  skills: addedSkillsList.value.map((skill) => ({ id: skill.id, skill: skill.skill })),
+  experienceList: experienceList.map((item) => ({ ...item })),
+  educationList: educationList.map((item) => ({ ...item })),
+  projectsList: projectsList.map((item) => ({ ...item })),
+  isCurrent: isCurrent.value,
+  isFresher: isFresher.value,
 })
 
-const submitForm = () => {
-  navigateTo('/lab/resume')
+const applyResumePayload = (payload: ResumeContent) => {
+  Object.assign(personalInfo, payload.personalInfo || {})
+  Object.assign(summary, payload.summary || {})
+
+  const skillMap: SkillTrack = {}
+  if (Array.isArray(payload.skills)) {
+    payload.skills.forEach((item) => {
+      if (item?.id && item?.skill) {
+        skillMap[item.id] = item.skill
+      }
+    })
+  }
+  addedSkills.value = skillMap
+
+  experienceList.length = 0
+  if (Array.isArray(payload.experienceList) && payload.experienceList.length) {
+    experienceList.push(...payload.experienceList)
+  } else {
+    experienceList.push({
+      job_title: '',
+      company: '',
+      from_month: '',
+      from_year: '',
+      to_month: '',
+      to_year: '',
+      job_location: '',
+      responsibilities: '',
+    })
+  }
+
+  educationList.length = 0
+  if (Array.isArray(payload.educationList) && payload.educationList.length) {
+    educationList.push(...payload.educationList)
+  } else {
+    educationList.push({
+      degree: '',
+      institution_name: '',
+      year: 0,
+    })
+  }
+
+  projectsList.length = 0
+  if (Array.isArray(payload.projectsList) && payload.projectsList.length) {
+    projectsList.push(...payload.projectsList)
+  } else {
+    projectsList.push({
+      project_title: '',
+      project_description: '',
+      tech_stack: '',
+      link: '',
+    })
+  }
+
+  isCurrent.value = Boolean(payload.isCurrent)
+  isFresher.value = Boolean(payload.isFresher)
+}
+
+const loadResume = async () => {
+  if (!resumeId.value) return
+  try {
+    isLoading.value = true
+    const response = await $fetch(`/api/student/resume/${resumeId.value}`, {
+      method: 'get',
+    })
+    if (response.statusCode !== 200 || !response.data?.content) {
+      toast.error(response.message || 'Failed to load resume')
+      return
+    }
+    applyResumePayload(response.data.content as ResumeContent)
+  } catch (error) {
+    toast.error('Failed to load resume')
+  } finally {
+    isLoading.value = false
+  }
+}
+
+const saveResume = async () => {
+  try {
+    isSaving.value = true
+    const response = await $fetch('/api/student/resume/save', {
+      method: 'post',
+      body: {
+        resumeId: resumeId.value || undefined,
+        title: resumeTitle.value,
+        content: buildResumePayload(),
+      },
+    })
+
+    if (![200, 201].includes(response.statusCode)) {
+      toast.error(response.message || 'Failed to save resume')
+      return
+    }
+
+    toast.success(response.message || 'Resume saved')
+    navigateTo('/resumevault')
+  } catch (error) {
+    toast.error('Failed to save resume')
+  } finally {
+    isSaving.value = false
+  }
 }
 
 interface SkillTrack {
@@ -103,8 +233,21 @@ const checkOverflow = (): void => {
   isOverflowing.value = el.scrollHeight > el.clientHeight
 }
 
-watch(form, checkOverflow, { deep: true })
-onMounted(checkOverflow)
+const resumeSnapshot = computed(() => ({
+  personalInfo: { ...personalInfo },
+  summary: { ...summary },
+  skills: addedSkillsList.value.map((item) => ({ ...item })),
+  experienceList: experienceList.map((item) => ({ ...item })),
+  educationList: educationList.map((item) => ({ ...item })),
+  projectsList: projectsList.map((item) => ({ ...item })),
+}))
+
+watch(resumeSnapshot, checkOverflow, { deep: true })
+
+onMounted(async () => {
+  await loadResume()
+  checkOverflow()
+})
 
 const months = [
   { label: 'January', value: 'Jan' },
@@ -222,16 +365,39 @@ const removeProject = (index: number) => {
 </script>
 
 <template>
-  <div class="flex h-screen max-h-screen overflow-hidden">
+    <div class="flex h-screen max-h-screen flex-col overflow-hidden">
     <!-- 📝 LEFT : FORM (scrollable) -->
-    <div class="w-full space-y-12 overflow-y-auto bg-white p-10 lg:w-1/2">
+      <header
+        class="flex flex-col gap-4 border-b border-slate-200 bg-white px-8 py-4 shadow-sm md:flex-row md:items-center md:justify-between"
+      >
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-slate-400">Resume Vault</p>
+          <h1 class="text-2xl font-semibold text-slate-900">
+            {{ resumeId ? 'Edit Resume' : 'Create Resume' }}
+          </h1>
+          <p class="text-sm text-slate-600">
+            {{ resumeTitle }}
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          <Button variant="outline" class="px-4" @click="navigateTo('/resumevault')">
+            Back to Vault
+          </Button>
+          <Button class="px-5" :disabled="isSaving || isLoading" @click="saveResume">
+            {{ isSaving ? 'Saving...' : 'Save Resume' }}
+          </Button>
+        </div>
+      </header>
+
+      <div class="flex flex-1 overflow-hidden">
+        <div class="w-full space-y-12 overflow-y-auto bg-white p-10 lg:w-1/2">
       <!-- ⭐ PERSONAL INFO -->
       <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Personal Information</h2>
         <div class="grid grid-cols-2 gap-4">
           <Field>
-            <FieldLabel>Name</FieldLabel
-            ><Input v-model="personalInfo.name" placeholder="Your Name" />
+            <FieldLabel>Name</FieldLabel>
+            <Input v-model="personalInfo.name" placeholder="Your Name" />
           </Field>
           <div class="flex flex-row items-end justify-center gap-2">
             <Field class="w-fit">
@@ -247,8 +413,8 @@ const removeProject = (index: number) => {
               </Select>
             </Field>
             <Field>
-              <FieldLabel>Phone</FieldLabel
-              ><Input v-model="personalInfo.phone_number" placeholder="12345 67890" />
+              <FieldLabel>Phone</FieldLabel>
+              <Input v-model="personalInfo.phone_number" placeholder="12345 67890" />
             </Field>
           </div>
 
@@ -256,8 +422,8 @@ const removeProject = (index: number) => {
             <FieldLabel>Email</FieldLabel><Input v-model="personalInfo.email" type="email" />
           </Field>
           <Field>
-            <FieldLabel>Location</FieldLabel
-            ><Input v-model="personalInfo.location" placeholder="City, State" />
+            <FieldLabel>Location</FieldLabel>
+            <Input v-model="personalInfo.location" placeholder="City, State" />
           </Field>
 
           <Field>
@@ -271,12 +437,12 @@ const removeProject = (index: number) => {
       <section class="space-y-6">
         <h2 class="border-b pb-2 text-xl font-semibold">Summary / Objective</h2>
         <Field>
-          <FieldLabel>Preferred Role</FieldLabel
-          ><Input v-model="summary.pref_role" placeholder="Frontend Developer" />
+          <FieldLabel>Preferred Role</FieldLabel>
+          <Input v-model="summary.pref_role" placeholder="Frontend Developer" />
         </Field>
         <Field>
-          <FieldLabel>Short Summary</FieldLabel
-          ><Textarea
+          <FieldLabel>Short Summary</FieldLabel>
+          <Textarea
             v-model="summary.summary"
             class="h-34 resize-none"
             placeholder="2–3 line pitch..."
@@ -469,8 +635,8 @@ const removeProject = (index: number) => {
             </Field>
             <!-- LOCATION -->
             <Field>
-              <FieldLabel>Location</FieldLabel
-              ><Input :v-model="item.job_location" placeholder="Chennai" />
+              <FieldLabel>Location</FieldLabel>
+              <Input :v-model="item.job_location" placeholder="Chennai" />
             </Field>
           </div>
 
@@ -515,8 +681,8 @@ const removeProject = (index: number) => {
               <FieldLabel>Institute</FieldLabel><Input :v-model="item.institution_name" />
             </Field>
             <Field class="w-fit">
-              <FieldLabel>Graduation Year</FieldLabel
-              ><Input :v-model="item.year" placeholder="2024" />
+              <FieldLabel>Graduation Year</FieldLabel>
+              <Input :v-model="item.year" placeholder="2024" />
             </Field>
           </div>
         </section>
@@ -546,8 +712,8 @@ const removeProject = (index: number) => {
           </Field>
           <Field> <FieldLabel>Tech Used</FieldLabel><Input :v-model="item.tech_stack" /> </Field>
           <Field>
-            <FieldLabel>Description</FieldLabel
-            ><Textarea :v-model="item.project_description" class="h-44 resize-none" />
+            <FieldLabel>Description</FieldLabel>
+            <Textarea :v-model="item.project_description" class="h-44 resize-none" />
           </Field>
           <Field>
             <FieldLabel>Link</FieldLabel><Input :v-model="item.link" placeholder="https://..." />
@@ -559,7 +725,9 @@ const removeProject = (index: number) => {
       </section>
 
       <!-- SUBMIT -->
-      <Button class="mt-4 w-full py-6 text-lg" @click="submitForm"> Save Resume </Button>
+      <Button class="mt-4 w-full py-6 text-lg" :disabled="isSaving || isLoading" @click="saveResume">
+        {{ isSaving ? 'Saving...' : 'Save Resume' }}
+      </Button>
     </div>
 
     <!-- 📄 RIGHT : FIXED PREVIEW -->
@@ -606,6 +774,7 @@ const removeProject = (index: number) => {
           <p class="text-sm font-medium">{{ proj.project_title }}</p>
           <p class="text-xs">{{ proj.tech_stack }}</p>
           <pre class="text-xs">{{ proj.project_description }}</pre>
+        </div>
         </div>
       </div>
     </div>

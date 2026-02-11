@@ -5,6 +5,7 @@ const UserSchema = new Schema(
     // Common Fields for everyone
     user_id: { type: String, unique: true },
     email: { type: String, sparse: true, unique: true, lowercase: true },
+    email_verified: { type: Boolean, default: false },
     password: { type: String, required: true, select: false },
     role: {
       type: String,

@@ -19,6 +19,7 @@ export default defineNuxtConfig({
     public: {
       mongoUri: process.env.NUXT_MONGODB_CONNECTION,
       jwtAccessSecret: process.env.NUXT_JWT_REFRESH_SECRET,
+      appUrl: process.env.NUXT_PUBLIC_APP_URL || 'http://localhost:3000',
     },
   },
 

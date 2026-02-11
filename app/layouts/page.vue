@@ -10,39 +10,55 @@ import {
   SidebarMenuItem,
   SidebarProvider,
 } from '@/components/ui/sidebar'
-import { Calendar, FlaskConical, House } from 'lucide-vue-next'
+import { BookOpen, Calendar, FileText, FlaskConical, House } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
 
 const token = useCookie('access_token').value
 const user = decodeJWT(token)
 const userRole = user?.role || 'student'
 
-const items = [
+const adminItems = [
   {
     title: 'Home',
-    url: {
-      admin: '/admin/home',
-      student: '/home',
-    },
+    url: '/admin/home',
     icon: House,
   },
   {
     title: 'Lab',
-    url: {
-      admin: '/admin/lab',
-      student: '/lab',
-    },
+    url: '/admin/lab',
     icon: FlaskConical,
   },
   {
     title: 'Drives',
-    url: {
-      admin: '/admin/drives',
-      student: '/drives',
-    },
+    url: '/admin/drives',
     icon: Calendar,
   },
 ]
+
+const studentItems = [
+  {
+    title: 'Home',
+    url: '/home',
+    icon: House,
+  },
+  {
+    title: 'Practice',
+    url: '/lab',
+    icon: BookOpen,
+  },
+  {
+    title: 'Resume Vault',
+    url: '/resumevault',
+    icon: FileText,
+  },
+  {
+    title: 'Drives',
+    url: '/drives',
+    icon: Calendar,
+  },
+]
+
+const items = computed(() => (userRole === 'admin' ? adminItems : studentItems))
 
 const logout = async () => {
   const response = await $fetch('/api/auth/logout', {
@@ -78,12 +94,9 @@ const logout = async () => {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem v-for="item in items" :key="item.title">
-                <SidebarMenuButton as-child>
-                  <NuxtLink
-                    :to="userRole === 'admin' ? item.url.admin : item.url.student"
-                    class="flex items-center gap-2"
-                  >
+                <SidebarMenuItem v-for="item in items" :key="item.title">
+                  <SidebarMenuButton as-child>
+                  <NuxtLink :to="item.url" class="flex items-center gap-2">
                     <component :is="item.icon" />
                     <span>{{ item.title }}</span>
                   </NuxtLink>

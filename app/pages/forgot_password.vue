@@ -12,87 +12,56 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Spinner } from '@/components/ui/spinner'
-import { reactive } from 'vue'
-import Muted from '~/components/ui/muted/Muted.vue'
 import { toast } from 'vue-sonner'
+import Muted from '~/components/ui/muted/Muted.vue'
 
 definePageMeta({
   layout: 'auth',
 })
 
 const form = reactive({
-  password: '',
-  user_id: '',
+  email: '',
 })
 
 const errors = reactive({
-  password: '',
-  user_id: '',
+  email: '',
 })
 
 const isLoading = ref(false)
 
-const isValidId = (id: string) => {
-  if (id.length > 12 || id.length < 7) {
-    return false
-  }
-  return true
+const isValidEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
-const handleLogin = async () => {
-  errors.password = form.password.length < 6 ? 'Too short' : ''
-  errors.user_id = isValidId(form.user_id) ? '' : 'Invalid Reg No / Admin Id'
-
-  if (errors.user_id || errors.password) return
-
-  const loginData = {
-    password: form.password,
-    user_id: form.user_id,
-  }
+const handleResetRequest = async () => {
+  errors.email = isValidEmail(form.email) ? '' : 'Invalid email'
+  if (errors.email) return
 
   isLoading.value = true
 
-  const response = await $fetch('/api/auth/login', {
-    method: 'post',
-    body: loginData,
-  })
+  try {
+    const response = await $fetch('/api/auth/forgotPassword', {
+      method: 'post',
+      body: { email: form.email },
+    })
 
-  setTimeout(() => {
-    isLoading.value = false
-    form.password = ''
-    form.user_id = ''
-    errors.password = ''
-    errors.user_id = ''
     if (response.statusCode !== 200) {
-      toast.error('Error logging in: ' + response.message)
+      toast.error(response.message || 'Failed to send reset link')
     } else {
-      toast.success('Login successful!')
-      setTimeout(() => {
-        if (response.role == 'admin') {
-          navigateTo({
-            path: '/redirect',
-            query: {
-              redirect: '/admin/home',
-            },
-          })
-        } else {
-          navigateTo({
-            path: '/redirect',
-            query: {
-              redirect: '/home',
-            },
-          })
-        }
-      }, 1000)
+      toast.success(response.message || 'Reset link sent')
     }
-  }, 1000)
+  } catch (err: unknown) {
+    if (err instanceof Error) toast.error(err.message)
+  } finally {
+    isLoading.value = false
+  }
 }
 
-const goToSignup = () => {
+const goToLogin = () => {
   navigateTo({
     path: '/redirect',
     query: {
-      redirect: '/signup',
+      redirect: '/login',
     },
   })
 }
@@ -113,60 +82,39 @@ const goToSignup = () => {
             <Sparkles class="h-4 w-4" />
             Placement Pal
           </div>
-          <CardTitle class="mt-3 text-2xl">Login</CardTitle>
-          <CardDescription>Use your registration number or admin ID.</CardDescription>
+          <CardTitle class="mt-3 text-2xl">Reset your password</CardTitle>
+          <CardDescription>
+            Enter your email and we&apos;ll send you a reset link.
+          </CardDescription>
         </CardHeader>
         <CardContent>
-          <form class="grid gap-4" @submit.prevent="handleLogin">
+          <form class="grid gap-4" @submit.prevent="handleResetRequest">
             <div class="flex flex-col space-y-1.5">
-              <Label for="user_id">Reg No / Admin Id</Label>
+              <Label for="email">Email</Label>
               <Input
-                id="user_id"
-                v-model="form.user_id"
-                type="text"
-                placeholder="710020104037 / EMP1000"
-                autocomplete="username"
+                id="email"
+                v-model="form.email"
+                type="email"
+                placeholder="you@aurcc.edu"
+                autocomplete="email"
                 :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
                 :disabled="isLoading"
               />
-              <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.user_id }}</Muted>
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <div class="flex items-center">
-                <Label for="password">Password</Label>
-                <NuxtLink to="/forgot_password" class="ml-auto text-xs text-slate-500 underline">
-                  Forgot password?
-                </NuxtLink>
-              </div>
-              <Input
-                id="password"
-                v-model="form.password"
-                type="password"
-                placeholder="Enter your password"
-                autocomplete="current-password"
-                :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
-                :disabled="isLoading"
-              />
-              <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.password }}</Muted>
+              <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.email }}</Muted>
             </div>
             <Button class="w-full" type="submit" :disabled="isLoading">
-              <span v-if="!isLoading">Login</span>
+              <span v-if="!isLoading">Send reset link</span>
               <Spinner v-else />
             </Button>
           </form>
         </CardContent>
         <CardFooter class="flex flex-col gap-2">
-          <div class="text-center text-sm text-slate-500">
-            New here?
-            <button
-              type="button"
-              class="text-primary underline"
-              :disabled="isLoading"
-              @click="goToSignup"
-            >
-              Create an account
+          <CardDescription class="text-center">
+            Remembered your password?
+            <button type="button" class="text-primary underline" @click="goToLogin">
+              Back to login
             </button>
-          </div>
+          </CardDescription>
         </CardFooter>
       </Card>
     </div>
@@ -242,6 +190,15 @@ const goToSignup = () => {
   min-height: calc(100vh - 5rem);
 }
 
+.auth-card {
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+  width: 100%;
+}
+
 .brand-pill {
   display: inline-flex;
   align-items: center;
@@ -254,15 +211,6 @@ const goToSignup = () => {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-}
-
-.auth-card {
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  border-radius: 1.5rem;
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
-  width: 100%;
 }
 
 @keyframes float {

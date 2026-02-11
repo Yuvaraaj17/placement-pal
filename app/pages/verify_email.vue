@@ -9,11 +9,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Spinner } from '@/components/ui/spinner'
 import { toast } from 'vue-sonner'
-import Muted from '~/components/ui/muted/Muted.vue'
 
 definePageMeta({
   layout: 'auth',
@@ -21,58 +18,51 @@ definePageMeta({
 
 const route = useRoute()
 const token = computed(() => String(route.query.token || ''))
+const isLoading = ref(true)
+const message = ref('Verifying your email...')
 
-const form = reactive({
-  password: '',
-  confirmPassword: '',
-})
-
-const errors = reactive({
-  password: '',
-  confirmPassword: '',
-})
-
-const isLoading = ref(false)
-
-const handleReset = async () => {
-  errors.password = form.password.length < 6 ? 'Too short' : ''
-  errors.confirmPassword = form.password !== form.confirmPassword ? 'Passwords do not match' : ''
-
-  if (errors.password || errors.confirmPassword) return
+const verifyEmail = async () => {
   if (!token.value) {
-    toast.error('Missing reset token.')
+    message.value = 'Verification token is missing.'
+    isLoading.value = false
     return
   }
 
-  isLoading.value = true
-
   try {
-    const response = await $fetch('/api/auth/resetPassword', {
+    const response = await $fetch('/api/auth/verifyEmail', {
       method: 'post',
-      body: {
-        token: token.value,
-        password: form.password,
-      },
+      body: { token: token.value },
     })
 
     if (response.statusCode !== 200) {
-      toast.error(response.message || 'Failed to reset password')
+      message.value = response.message || 'Verification failed.'
+      toast.error(message.value)
     } else {
-      toast.success('Password reset successful. Please log in.')
-      setTimeout(() => {
-        navigateTo({
-          path: '/redirect',
-          query: {
-            redirect: '/login',
-          },
-        })
-      }, 1000)
+      message.value = 'Email verified successfully. You can log in now.'
+      toast.success('Email verified.')
     }
   } catch (err: unknown) {
-    if (err instanceof Error) toast.error(err.message)
+    if (err instanceof Error) {
+      message.value = err.message
+    } else {
+      message.value = 'Verification failed.'
+    }
   } finally {
     isLoading.value = false
   }
+}
+
+onMounted(() => {
+  verifyEmail()
+})
+
+const goToLogin = () => {
+  navigateTo({
+    path: '/redirect',
+    query: {
+      redirect: '/login',
+    },
+  })
 }
 </script>
 
@@ -91,46 +81,17 @@ const handleReset = async () => {
             <Sparkles class="h-4 w-4" />
             Placement Pal
           </div>
-          <CardTitle class="mt-3 text-2xl">Set a new password</CardTitle>
-          <CardDescription>Choose a strong password you can remember.</CardDescription>
+          <CardTitle class="mt-3 text-2xl">Verify email</CardTitle>
+          <CardDescription>Confirming your account.</CardDescription>
         </CardHeader>
         <CardContent>
-          <form class="grid gap-4" @submit.prevent="handleReset">
-            <div class="flex flex-col space-y-1.5">
-              <Label for="password">New Password</Label>
-              <Input
-                id="password"
-                v-model="form.password"
-                type="password"
-                autocomplete="new-password"
-                :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
-                :disabled="isLoading"
-              />
-              <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.password }}</Muted>
-            </div>
-            <div class="flex flex-col space-y-1.5">
-              <Label for="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                v-model="form.confirmPassword"
-                type="password"
-                autocomplete="new-password"
-                :class="isLoading ? 'cursor-not-allowed opacity-50' : ''"
-                :disabled="isLoading"
-              />
-              <Muted class="ml-2 block min-h-5 text-red-400">{{ errors.confirmPassword }}</Muted>
-            </div>
-            <Button class="w-full" type="submit" :disabled="isLoading">
-              <span v-if="!isLoading">Reset Password</span>
-              <Spinner v-else />
-            </Button>
-          </form>
+          <div class="flex items-center gap-2 text-sm text-slate-600">
+            <Spinner v-if="isLoading" />
+            <span>{{ message }}</span>
+          </div>
         </CardContent>
         <CardFooter class="flex flex-col gap-2">
-          <CardDescription class="text-center">
-            Remembered your password?
-            <NuxtLink to="/login" class="text-primary underline">Back to login</NuxtLink>
-          </CardDescription>
+          <Button class="w-full" :disabled="isLoading" @click="goToLogin">Go to login</Button>
         </CardFooter>
       </Card>
     </div>
